@@ -26,7 +26,7 @@ public class Product {
 	@Column(name="Description")
 	private String description;
 	
-	@Column(name="Brand Name")
+	@Column(name="Brand_Name")
 	private String brandName;
 	
 	@Column(name="Model")
