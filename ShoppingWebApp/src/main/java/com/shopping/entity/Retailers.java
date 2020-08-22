@@ -3,6 +3,7 @@ package com.shopping.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,10 +16,19 @@ public class Retailers {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Retailer_Id")
 	private int retailerId;
+	
+	@Column(name="Name")
 	private String name;
+	
+	@Column(name="Email")
 	private String email;
+	
+	@Column(name="Contact_Number")
 	private int contactNumber;
+	
+	@Column(name="Password")
 	private String password;
 	
 	@OneToMany(mappedBy = "retailers", cascade = CascadeType.MERGE)

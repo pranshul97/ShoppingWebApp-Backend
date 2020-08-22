@@ -14,21 +14,34 @@ public class Product {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Product_Id")
 	private int productId;
+	
+	@Column(name="Product_Name")
 	private String name;
+	
+	@Column(name="Price")
 	private double price;
+	
+	@Column(name="Description")
 	private String description;
+	
+	@Column(name="Brand Name")
 	private String brandName;
+	
+	@Column(name="Model")
 	private String model;
+	
+	@Column(name="Quantity")
 	private int quantity;
 	
 	@ManyToOne
-	@JoinColumn(name="retailerId")
+	@JoinColumn(name="Retailer_Id")
 	private Retailers retailer;//This is for resolving Many to many relationship
 	private int itemsSold;
 	
 	@ManyToOne
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name="Category_Id")
 	private Category category;
 
 	

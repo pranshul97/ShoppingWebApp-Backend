@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,10 +11,19 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue
+	@Column(name="User_Id")
 	private int userId;
+	
+	@Column(name="Name")
 	private String name;
+	
+	@Column(name="Email")
 	private String email;
+	
+	@Column(name="Contact_Number")
 	private int contactNumber;
+	
+	@Column(name="Password")
 	private String password;
 	
 	public int getUserId() {
