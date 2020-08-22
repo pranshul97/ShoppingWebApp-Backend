@@ -3,11 +3,9 @@ package com.project;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.jws.soap.SOAPBinding.Use;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +20,6 @@ import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
 import com.project.repository.RetailerRepo;
-import com.project.repository.RetailerRepoImpl;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
