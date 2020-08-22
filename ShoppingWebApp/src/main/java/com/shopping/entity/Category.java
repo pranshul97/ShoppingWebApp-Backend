@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbl_Category")
+@Table(name="tbl_category")
 public class Category {
 
 	@Id
