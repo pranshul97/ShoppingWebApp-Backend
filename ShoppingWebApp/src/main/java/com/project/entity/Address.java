@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbl_address")
 public class Address {
-
+//comment by bhavya
 	@Id
 	@GeneratedValue
 	@Column(name="Address_Id")
