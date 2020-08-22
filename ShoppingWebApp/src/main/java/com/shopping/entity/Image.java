@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,11 +14,13 @@ public class Image {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Image_Id")
 	private int imageId;
 	
 	@ManyToOne
-	@JoinColumn(name = "productId")
+	@JoinColumn(name = "Product_Id")
 	private Product product;
+	@Column(name="Image_Link")
 	private String imageLink;
 	public int getImageId() {
 		return imageId;

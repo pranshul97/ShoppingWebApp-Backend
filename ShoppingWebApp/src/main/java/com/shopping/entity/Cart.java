@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,15 +14,17 @@ public class Cart {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Cart_Id")
 	private int id;
 	
 	@ManyToOne//this can be made lazy.
-	@JoinColumn(name="userId")
+	@JoinColumn(name="User_Id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name="productId")
+	@JoinColumn(name="Product_Id")
 	private Product product;
+	@Column(name="Quantity")
 	private int quantity;
 	public int getId() {
 		return id;

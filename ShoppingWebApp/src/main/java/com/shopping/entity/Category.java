@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +14,12 @@ public class Category {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Category_Id")
 	private int categoryId;
+	@Column(name="Name")
 	private String categoryName;
 	@OneToOne
-	@JoinColumn(name="parentId")
+	@JoinColumn(name="Parent_Id")
 	private Category category;
 	public int getCategoryId() {
 		return categoryId;
