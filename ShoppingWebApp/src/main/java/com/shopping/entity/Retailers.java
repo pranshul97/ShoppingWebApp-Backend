@@ -26,7 +26,7 @@ public class Retailers {
 	private String email;
 	
 	@Column(name="Contact_Number")
-	private int contactNumber;
+	private long contactNumber;
 	
 	@Column(name="Password")
 	private String password;
@@ -58,11 +58,11 @@ public class Retailers {
 		this.email = email;
 	}
 
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
