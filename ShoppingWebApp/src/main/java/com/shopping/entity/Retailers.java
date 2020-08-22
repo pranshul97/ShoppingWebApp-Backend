@@ -31,7 +31,7 @@ public class Retailers {
 	@Column(name="Password")
 	private String password;
 	
-	@OneToMany(mappedBy = "retailers", cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "retailer", cascade = CascadeType.MERGE)
 	private List<Product> products;
 
 	public int getRetailerId() {

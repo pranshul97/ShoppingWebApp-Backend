@@ -38,7 +38,7 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="Retailer_Id")
 	private Retailers retailer;//This is for resolving Many to many relationship
-	private int itemsSold;
+	//private int itemsSold;
 	
 	@ManyToOne
 	@JoinColumn(name="Category_Id")
@@ -110,13 +110,7 @@ public class Product {
 		this.retailer = retailer;
 	}
 
-	public int getItemsSold() {
-		return itemsSold;
-	}
-
-	public void setItemsSold(int itemsSold) {
-		this.itemsSold = itemsSold;
-	}
+	
 
 	public Category getCategory() {
 		return category;
