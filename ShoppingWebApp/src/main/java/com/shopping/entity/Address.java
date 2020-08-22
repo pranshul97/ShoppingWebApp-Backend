@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 //Address class by Madhav
+//Address class by Bhavya
 @Entity
 @Table(name="tbl_address")
 public class Address {
