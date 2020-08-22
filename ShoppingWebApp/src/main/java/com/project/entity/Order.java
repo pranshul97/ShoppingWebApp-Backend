@@ -28,8 +28,9 @@ public class Order {
 	@JoinColumn(name="Address_Id")
 	private Address address;
 	
-	@Column(name="Payment_Id")
-	private int paymentId;
+	@ManyToOne
+	@JoinColumn(name="Payment_Id")
+	private Payment payment;
 	
 	@Column(name="Status")
 	private String status;
@@ -61,11 +62,11 @@ public class Order {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public int getPaymentId() {
-		return paymentId;
+	public Payment getPayment() {
+		return payment;
 	}
-	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 	public String getStatus() {
 		return status;

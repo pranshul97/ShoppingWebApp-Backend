@@ -1,5 +1,10 @@
 package com.project;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import javax.jws.soap.SOAPBinding.Use;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +13,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.project.entity.Address;
+import com.project.entity.Cart;
 import com.project.entity.Category;
+import com.project.entity.Order;
+import com.project.entity.Payment;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
@@ -96,8 +105,69 @@ class DemoApplicationTests {
 		prod.setBrandName("Adidas");
 		ret.save(prod);
 	}
-
 	
+	@Test
+	void saveIteminCart() {
+		
+		Product prod=ret.fetch(Product.class, 23);
+		
+		User usr=ret.fetch(User.class, 9);
+		
+		Cart crt=new Cart();
+		crt.setProduct(prod);
+		crt.setUser(usr);
+		crt.setQuantity(13);
+		
+		ret.save(crt);
+	}
+	
+	@Test
+	void addPayment() {
+		Payment pay=new Payment();
+		pay.setMode("COD");
+		pay.setStatus("Completed");
+		pay.setTimestamp(LocalDateTime.now());
+		
+		ret.save(pay);
+	}
+	
+	@Test
+	void addAddress() {
+		User usr=ret.fetch(User.class, 13);
+		
+		Address add=new Address();
+		add.setContactNumber(17895231211L);
+		add.setHouseNumber("A-101");
+		add.setLandmark("Aatank Gali");
+		add.setLocality("Khunkhar Mohalla");
+		add.setCity("Meerut");
+		add.setState("UP");
+		add.setCountry("India");
+		add.setPincode(12356);
+		add.setUser(usr);
+		
+		ret.save(add);
+	}
+	
+	@Test
+	void addOrder() {
+		User usr=ret.fetch(User.class, 13);
+		
+		Address add=ret.fetch(Address.class, 27);
+		
+		Payment pay=ret.fetch(Payment.class, 26);
+		
+		Order ord=new Order();
+		ord.setStatus("Delivered");
+		ord.setOrderDate(LocalDate.now());
+		ord.setQuantity(12);
+		ord.setDeliveryDate(LocalDate.now());
+		ord.setUser(usr);
+		ord.setAddress(add);
+		ord.setPayment(pay);
+		
+		ret.save(ord);
+	}
 }
 
 
