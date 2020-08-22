@@ -1,15 +1,18 @@
-package com.shopping.repository;
+package com.project.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
-import com.shopping.entity.Retailers;
+import com.project.entity.Retailers;
+import com.project.entity.User;
 
-@Component
+@Repository
 public class RetailerRepoImpl implements RetailerRepo {
 
 	@PersistenceContext
@@ -17,7 +20,7 @@ public class RetailerRepoImpl implements RetailerRepo {
 	
 	@Override
 	@Transactional
-	public void save(Retailers ret) {
-		em.merge(ret);
+	public void save(User ret) {
+		em.persist(ret);
 	}
 }

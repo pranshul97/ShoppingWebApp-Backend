@@ -1,4 +1,4 @@
-package com.shopping.entity;
+package com.project.entity;
 
 import java.time.LocalDateTime;
 

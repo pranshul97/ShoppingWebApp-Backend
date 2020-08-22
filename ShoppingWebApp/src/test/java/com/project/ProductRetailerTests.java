@@ -7,14 +7,15 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.shopping.entity.Product;
-import com.shopping.entity.Retailers;
-import com.shopping.repository.RetailerRepo;
-import com.shopping.repository.RetailerRepoImpl;
+import com.project.entity.Product;
+import com.project.entity.Retailers;
+import com.project.entity.User;
+import com.project.repository.RetailerRepo;
+import com.project.repository.RetailerRepoImpl;
 
 @SpringBootTest
 //@DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE)
+//@AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class ProductRetailerTests {
 
@@ -22,10 +23,10 @@ public class ProductRetailerTests {
 	RetailerRepoImpl retailerImpl;*/
 	
 	@Test
-	public void addRetailer() {
+	void addRetailer() {
 		
 		//
-		
+		/*
 		Retailers ret=new Retailers();
 		ret.setName("Majnu Bhai");
 		ret.setEmail("majnu@gmail");
@@ -33,7 +34,15 @@ public class ProductRetailerTests {
 		ret.setPassword("majnu@123");
 		
 		RetailerRepo retailerImpl=new RetailerRepoImpl();
-		retailerImpl.save(ret);
+		retailerImpl.save(ret);*/
 		
+		User user=new User();
+		user.setName("Pranshul");
+		user.setContactNumber(100000000);
+		user.setEmail("pranshul@iab");
+		user.setPassword("123456");
+		
+		RetailerRepo retailerImpl=new RetailerRepoImpl();
+		retailerImpl.save(user);
 	}
 }
