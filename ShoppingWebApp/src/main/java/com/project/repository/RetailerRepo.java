@@ -7,6 +7,8 @@ import com.project.entity.User;
 
 public interface RetailerRepo {
 
-	void save(User ret);
+	void save(Object ret);
+
+	<T> T fetch(Class<T> clazz, Object pk);
 
 }

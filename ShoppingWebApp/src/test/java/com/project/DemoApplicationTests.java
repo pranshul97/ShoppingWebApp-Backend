@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.project.entity.Retailers;
 import com.project.entity.User;
 import com.project.repository.RetailerRepo;
 import com.project.repository.RetailerRepoImpl;
@@ -18,14 +19,14 @@ import com.project.repository.RetailerRepoImpl;
 class DemoApplicationTests {
 
 	@Autowired
-	private RetailerRepo retailerImpl;
+	private RetailerRepo ret;
 	
 	@Test
 	void contextLoads() {
 	}
 
 	@Test
-	void addRetailer() {
+	void user() {
 		
 		//
 		/*
@@ -39,12 +40,33 @@ class DemoApplicationTests {
 		retailerImpl.save(ret);*/
 		
 		User user=new User();
-		user.setName("Pranshul");
-		user.setContactNumber(100000000);
-		user.setEmail("pranshul@iab");
-		user.setPassword("123456");
+		user.setName("Amit");
+		user.setContactNumber(745656521);
+		user.setEmail("adfds@qwe");
+		user.setPassword("548");
 		
 		//RetailerRepo retailerImpl=new RetailerRepoImpl();
-		retailerImpl.save(user);
+		ret.save(user);
 	}
+	
+	@Test
+	void fetchUser() {
+		User us=ret.fetch(User.class, 13);
+		
+		System.out.println(us.getUserId()+", "+us.getName()+", "+us.getContactNumber()+", "+us.getEmail());
+	}
+	
+	
+	@Test
+	void saveRetailer() {
+		Retailers retailer=new Retailers();
+		retailer.setName("Majnu Bhai");
+		retailer.setEmail("majnu@gmail");
+		retailer.setContactNumber(9999999999L);
+		retailer.setPassword("majnu@123");
+		
+		ret.save(retailer);
+	}
+	
+
 }

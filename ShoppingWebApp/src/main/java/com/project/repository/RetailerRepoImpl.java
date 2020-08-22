@@ -20,7 +20,14 @@ public class RetailerRepoImpl implements RetailerRepo {
 	
 	@Override
 	@Transactional
-	public void save(User ret) {
+	public void save(Object ret) {
 		em.persist(ret);
 	}
+	
+	@Override
+	public <T> T fetch(Class<T> clazz, Object pk) { //T is just a placeholder...we can use anything
+        
+        return em.find(clazz, pk);
+    }
+	
 }
