@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,18 +14,27 @@ public class Address {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Address_Id")
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name="User_Id")
 	private User user;
+	@Column(name="Contact_Number")
 	private int contactNumber;
+	@Column(name="House_Number")
 	private String houseNumber;
+	@Column(name="Landmark")
 	private String landmark;
+	@Column(name= "Locality")
 	private String locality;
+	@Column(name="City")
 	private String city;
+	@Column(name="State")
 	private String state;
+	@Column(name = "Country")
 	private String country;
+	@Column(name = "Pincode")
 	private int pincode;
 	public int getId() {
 		return id;
