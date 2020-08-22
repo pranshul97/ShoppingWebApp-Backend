@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+//Address class by Madhav
 @Entity
 @Table(name="tbl_address")
 public class Address {
