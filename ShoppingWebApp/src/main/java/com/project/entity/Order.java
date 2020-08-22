@@ -1,4 +1,4 @@
-package com.project.entity;
+ package com.project.entity;
 
 import java.time.LocalDate;
 
@@ -28,9 +28,8 @@ public class Order {
 	@JoinColumn(name="Address_Id")
 	private Address address;
 	
-	@ManyToOne
-	@JoinColumn(name="Payment_Id")
-	private Payment payment;
+	@Column(name="Payment_Id")
+	private int paymentId;
 	
 	@Column(name="Status")
 	private String status;
@@ -62,11 +61,11 @@ public class Order {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public Payment getPayment() {
-		return payment;
+	public int getPaymentId() {
+		return paymentId;
 	}
-	public void setPayment(Payment payment) {
-		this.payment = payment;
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
 	}
 	public String getStatus() {
 		return status;
