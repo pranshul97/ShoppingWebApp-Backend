@@ -44,7 +44,6 @@ public class Product {
 	@JoinColumn(name="Category_Id")
 	private Category category;
 
-	
 
 	public int getProductId() {
 		return productId;
