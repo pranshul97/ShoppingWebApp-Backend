@@ -21,7 +21,7 @@ public class Address {
 	@JoinColumn(name="User_Id")
 	private User user;
 	@Column(name="Contact_Number")
-	private int contactNumber;
+	private long contactNumber;
 	@Column(name="House_Number")
 	private String houseNumber;
 	@Column(name="Landmark")
@@ -48,10 +48,10 @@ public class Address {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 	public String getHouseNumber() {
