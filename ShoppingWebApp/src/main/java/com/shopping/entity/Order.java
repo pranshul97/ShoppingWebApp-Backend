@@ -2,6 +2,7 @@ package com.shopping.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,19 +17,30 @@ public class Order {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Order_Id")
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name="User_Id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name="addressId")
+	@JoinColumn(name="Address_Id")
 	private Address address;
+	
+	@Column(name="Payment_Id")
 	private int paymentId;
+	
+	@Column(name="Status")
 	private String status;
+	
+	@Column(name="Date_of_order")
 	private LocalDate orderDate;
+	
+	@Column(name="Quantity_Ordered")
 	private int quantity;
+	
+	@Column(name="Delivery_Date")
 	private LocalDate deliveryDate;
 	
 	public int getId() {

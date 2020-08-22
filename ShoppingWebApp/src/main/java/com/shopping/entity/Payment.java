@@ -2,6 +2,7 @@ package com.shopping.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +14,18 @@ public class Payment {
 
 	@Id
 	@GeneratedValue
+	@Column(name="Payment_Id")
 	private int id;
+	
+	@Column(name="Payment_Mode")
 	private String mode;
+	
+	@Column(name="Payment_Time")
 	private LocalDateTime timestamp;
+	
+	@Column(name="Status")
 	private String status;
+	
 	public int getId() {
 		return id;
 	}

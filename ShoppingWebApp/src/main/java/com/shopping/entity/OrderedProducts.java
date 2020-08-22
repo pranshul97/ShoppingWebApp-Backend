@@ -1,5 +1,6 @@
 package com.shopping.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,21 +9,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbl_ordered_products")
+@Table(name="tbl_Ordered_products")
 public class OrderedProducts {
 
 	@Id
 	@GeneratedValue
+	@Column(name="ID")
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="orderId")
+	@JoinColumn(name="Order_Id")
 	private Order order;
 	
 	@ManyToOne
-	@JoinColumn(name="productId")
+	@JoinColumn(name="Product_Id")
 	private Product products;
+	
+	@Column(name="Quantity")
 	private int quantity;
+	
 	public int getId() {
 		return id;
 	}
