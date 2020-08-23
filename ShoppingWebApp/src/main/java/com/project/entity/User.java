@@ -21,7 +21,7 @@ public class User {
 	private String email;
 	
 	@Column(name="Contact_Number")
-	private int contactNumber;
+	private long contactNumber;
 	
 	@Column(name="Password")
 	private String password;
@@ -44,10 +44,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 	public String getPassword() {
