@@ -28,7 +28,8 @@ public class Order {
 	@JoinColumn(name="Address_Id")
 	private Address address;
 	
-	@Column(name="Payment_Id")
+	@ManyToOne
+	@JoinColumn(name="Payment_Id")
 	private Payment payment;
 	
 	@Column(name="Status")

@@ -48,10 +48,10 @@ class DemoApplicationTests {
 		retailerImpl.save(ret);*/
 		
 		User user=new User();
-		user.setName("Amit");
-		user.setContactNumber(745656521);
-		user.setEmail("adfds@qwe");
-		user.setPassword("548");
+		user.setName("Amitava");
+		user.setContactNumber(74859632);
+		user.setEmail("amitava@gmail");
+		user.setPassword("5589");
 		
 		//RetailerRepo retailerImpl=new RetailerRepoImpl();
 		ret.save(user);
