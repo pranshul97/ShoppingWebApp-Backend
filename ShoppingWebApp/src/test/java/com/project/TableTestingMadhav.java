@@ -175,10 +175,10 @@ public class TableTestingMadhav {
 		ret.save(ord);
 	}
 	
-	@Test
-	void fetchProductForCompare() {
-		cc.fetchProductDetails(4);
-	}
+	//@Test
+	//void fetchProductForCompare() {
+		//cc.fetchProductDetails(4);
+	//}
 
 }
 

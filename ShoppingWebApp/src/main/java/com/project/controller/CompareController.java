@@ -3,6 +3,9 @@
 
 package com.project.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +24,15 @@ public class CompareController {
 	private CompareMadhavServiceImpl compareService;
 	
 	@PostMapping("/compare")
-	public Product fetchProductDetails(@RequestBody CompareDto compareDto) {
-		Product proDetails = compareService.fetchProductForCompare(pId);
-		System.out.println(proDetails.getName() + " " + proDetails.getCategory() + " " + proDetails.getModel());
-		return proDetails;
+	public List<Product> fetchProductDetails(@RequestBody CompareDto compareDto) {
+		List<Product> proList = new ArrayList<>();
+		int idArrayLength = compareDto.arrayListSize();
+		for(int i=0; i<idArrayLength; i++) {
+			Product proDetails = compareService.fetchProductForCompare(compareDto.fetchElementValue(i));
+			proList.add(proDetails);
+		}
+		//System.out.println(proDetails.getName() + " " + proDetails.getCategory() + " " + proDetails.getModel());
+		return proList;
 	}
 
 }
