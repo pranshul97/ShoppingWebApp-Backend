@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.project.controller.CompareController;
 import com.project.entity.Address;
 import com.project.entity.Cart;
 import com.project.entity.Category;
@@ -20,15 +21,22 @@ import com.project.entity.Payment;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
+import com.project.repository.CompareRepo;
 import com.project.repository.RetailerRepo;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
-public class TableTesting {
+public class TableTestingMadhav {
 	
 	@Autowired
 	private RetailerRepo ret;
+	
+	@Autowired
+	private CompareRepo compareRepo;
+	
+	@Autowired
+	private CompareController cc;
 	
 	@Test
 	void contextLoads() {
@@ -166,5 +174,18 @@ public class TableTesting {
 		
 		ret.save(ord);
 	}
+	
+	@Test
+	void fetchProductForCompare() {
+		cc.fetchProductDetails(4);
+	}
 
 }
+
+
+
+
+
+
+
+
