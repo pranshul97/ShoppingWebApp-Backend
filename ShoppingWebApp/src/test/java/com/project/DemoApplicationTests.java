@@ -59,7 +59,7 @@ class DemoApplicationTests {
 	
 	@Test
 	void fetchUser() {
-		User us=ret.fetch(User.class, 13);
+		User us=ret.fetch(User.class, 1);
 		
 		System.out.println(us.getUserId()+", "+us.getName()+", "+us.getContactNumber()+", "+us.getEmail());
 	}
