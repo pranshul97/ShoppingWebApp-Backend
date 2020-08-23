@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.Dto.RetailerLoginDto;
 import com.project.controller.RetailerController.Status.StatusType;
 import com.project.entity.Retailers;
 import com.project.exception.RetailerServiceException;
@@ -24,14 +25,62 @@ public class RetailerController {
 	@PostMapping("/retailerRegister")
 	public Status register(@RequestBody Retailers retailers) {
 			
-			retailerService.addRetailer(retailers);
+			try{retailerService.addRetailer(retailers);
 			
 				
 			Status status = new Status();
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Registration successful");
 			return status;
+			}catch(RetailerServiceException e){
+				Status status = new Status();
+				status.setStatus(StatusType.FAILURE);
+				status.setMessage(e.getMessage());
+				return status;
+			}
 			
+		
+		
+	}
+	
+	@PostMapping("/retailerLogin")
+	public LoginStatus login(@RequestBody RetailerLoginDto retailerLoginDto) {
+		try {
+			Retailers retailers = retailerService.login(retailerLoginDto.getEmail(), retailerLoginDto.getPasssword());
+			LoginStatus loginStatus = new LoginStatus();
+			loginStatus.setStatus(StatusType.SUCCESS);
+			loginStatus.setMessage("Login Successful");
+			loginStatus.setRetailerId(retailers.getRetailerId());
+			loginStatus.setName(retailers.getName());
+			return loginStatus;
+		}
+		catch(RetailerServiceException e) {
+			LoginStatus loginStatus = new LoginStatus();
+			loginStatus.setStatus(StatusType.FAILURE);
+			loginStatus.setMessage(e.getMessage());
+			return loginStatus;
+		}
+		
+		
+		
+	}
+	
+	public static class LoginStatus extends Status{
+		private int retailerId;
+		private String name;
+		
+		public int getRetailerId() {
+			return retailerId;
+		}
+		public void setRetailerId(int retailerId) {
+			this.retailerId = retailerId;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
 		
 		
 	}

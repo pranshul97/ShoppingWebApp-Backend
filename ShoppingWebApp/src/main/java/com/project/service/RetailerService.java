@@ -9,6 +9,8 @@ public interface RetailerService {
 	
 	void addRetailer(Retailers retailers);
 	
+	Retailers login(String email, String password);
+	
 	
 
 }

@@ -36,6 +36,9 @@ public class TableTestingBhavya {
 		@Autowired
 		private RetailerController retailerController;
 		
+		@Autowired
+		private RetailerRepository retailerRepository;
+		
 		@Test
 		void contextLoads() {
 		}
@@ -183,6 +186,25 @@ public class TableTestingBhavya {
 			
 			retailerController.register(retailer);
 		}
+		
+	  
+		@Test
+		void findByEmailAndPassword() {
+			retailerRepository.findByEmailAndPassword("Bhavya@gmail.com", "Bhavya@123");
+		}
+		
+		@Test
+		void findById() {
+			retailerRepository.findById(31);
+		}
+		
+		@Test
+		void findAllRetailers() {
+			retailerRepository.findAllRetailers();
+		}
+		
+		
+		
 
 	}
 

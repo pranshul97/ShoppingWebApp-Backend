@@ -2,6 +2,8 @@
 
 package com.project.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -34,6 +36,30 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 				.getSingleResult() == 1 ? true : false;
 	
 	
+	}
+
+
+	@Override
+	public List<Retailers> findAllRetailers() {
+		return entityManager
+				.createNamedQuery("fetch-all")
+				.getResultList();
+	}
+
+
+	@Override
+	public int findByEmailAndPassword(String email, String password) {
+		return (Integer) entityManager
+				.createQuery("select r.retailerId from Retailers r where r.email = :em and r.password = :pw")
+				.setParameter("em", email)
+				.setParameter("pw", password)
+				.getSingleResult();
+	}
+
+
+	@Override
+	public Retailers findById(int retailerId) {
+		return entityManager.find(Retailers.class, retailerId);
 	}
 	
 	
