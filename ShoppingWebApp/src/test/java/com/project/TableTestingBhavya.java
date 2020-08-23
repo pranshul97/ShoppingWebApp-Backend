@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.project.controller.RetailerController;
 import com.project.entity.Address;
 import com.project.entity.Cart;
 import com.project.entity.Category;
@@ -20,6 +21,7 @@ import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
 import com.project.repository.RetailerRepo;
+import com.project.repository.RetailerRepository;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -30,6 +32,9 @@ public class TableTestingBhavya {
 		
 		@Autowired
 		private RetailerRepo ret;
+		
+		@Autowired
+		private RetailerController retailerController;
 		
 		@Test
 		void contextLoads() {
@@ -166,6 +171,17 @@ public class TableTestingBhavya {
 			ord.setPayment(pay);
 			
 			ret.save(ord);
+		}
+		
+		@Test
+		void addRetailer() {
+			Retailers retailer = new Retailers();
+			retailer.setName("bhavya");
+			retailer.setEmail("bhavya@lti.com");
+			retailer.setContactNumber(7011061337L);
+			retailer.setPassword("bhavya@123");
+			
+			retailerController.register(retailer);
 		}
 
 	}
