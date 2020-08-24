@@ -2,7 +2,7 @@ package com.project.Dto;
 
 public class RetailerLoginDto {
 	private String email;
-	private String passsword;
+	private String password;
 	
 	public String getEmail() {
 		return email;
@@ -10,11 +10,11 @@ public class RetailerLoginDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPasssword() {
-		return passsword;
+	public String getPassword() {
+		return password;
 	}
-	public void setPasssword(String passsword) {
-		this.passsword = passsword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 

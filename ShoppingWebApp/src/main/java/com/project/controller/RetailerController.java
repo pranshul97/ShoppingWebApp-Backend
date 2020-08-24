@@ -47,8 +47,8 @@ public class RetailerController {
 	public LoginStatus login(@RequestBody RetailerLoginDto retailerLoginDto) {
 		try {
 			System.out.println(retailerLoginDto.getEmail());
-			System.out.println(retailerLoginDto.getPasssword());
-			Retailers retailers = retailerService.login(retailerLoginDto.getEmail(), retailerLoginDto.getPasssword());
+			System.out.println(retailerLoginDto.getPassword());
+			Retailers retailers = retailerService.login(retailerLoginDto.getEmail(), retailerLoginDto.getPassword());
 			LoginStatus loginStatus = new LoginStatus();
 			loginStatus.setStatus(StatusType.SUCCESS);
 			loginStatus.setMessage("Login Successful");

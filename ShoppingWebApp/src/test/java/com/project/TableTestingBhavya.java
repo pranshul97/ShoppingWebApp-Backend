@@ -192,7 +192,7 @@ public class TableTestingBhavya {
 		void findByEmailAndPassword() {
 			RetailerLoginDto retailerLoginDto = new RetailerLoginDto();
 			retailerLoginDto.setEmail("bhavya@lti.com");
-			retailerLoginDto.setPasssword("bhavya@123");
+			retailerLoginDto.setPassword("bhavya@123");
 			retailerController.login(retailerLoginDto);
 		}
 		
