@@ -20,6 +20,7 @@ public class FetchProductController {
 	
 	@GetMapping("/fetchProduct")
 	public Product fetchProduct(@RequestParam("productId") int productId) {
+		//System.out.println(prodService.fetchProduct(productId).getRetailer().getRetailerId());
 		return prodService.fetchProduct(productId);
 	}
 }

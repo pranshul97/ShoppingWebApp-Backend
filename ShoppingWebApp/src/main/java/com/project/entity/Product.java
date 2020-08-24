@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_products")
 public class Product {
@@ -37,6 +39,7 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name="Retailer_Id")
+	@JsonIgnore
 	private Retailers retailer;//This is for resolving Many to many relationship
 	//private int itemsSold;
 	
