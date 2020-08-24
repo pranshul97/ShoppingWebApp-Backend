@@ -20,8 +20,10 @@ import com.project.entity.Payment;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
+import com.project.repository.ProductByRetailerRepository;
 import com.project.repository.RetailerRepo;
 import com.project.repository.RetailerRepository;
+import com.project.service.RetailerService;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -38,6 +40,12 @@ public class TableTestingBhavya {
 		
 		@Autowired
 		private RetailerRepository retailerRepository;
+		
+		@Autowired
+		private RetailerService retailerService;
+		
+		@Autowired
+		private ProductByRetailerRepository prodByRet;
 		
 		@Test
 		void contextLoads() {
@@ -89,7 +97,7 @@ public class TableTestingBhavya {
 		@Test
 		void saveCategory() {
 			Category cat=new Category();
-			cat.setCategoryName("Shoes");
+			cat.setCategoryName("Laptop");
 			
 			ret.save(cat);
 		}
@@ -217,10 +225,40 @@ public class TableTestingBhavya {
 
 		}
 		
+		@Test
+		void addProductByRetailer() {
+			Product product = new Product();
+			
+			product.setBrandName("Adidas");
+			product.setDescription("shoes");
+			product.setModel("new");
+			product.setName("NeonShoes");
+			product.setPrice(3000);
+			product.setQuantity(1);
+			
+			retailerRepository.addProductByRetailer(product);
+		
+	
+			
+			
+			
+		}
+		
+		@Test
+		void isCategoryPresentTesting() {
+			prodByRet.isCategoryPresent("Laptop");
+			Category c = prodByRet.fetchCategory("Laptop");
+			System.out.println(c.getCategoryName());
+			
+			
+			
+		}
+}
+		
 		
 		
 		
 
-	}
+	
 
 
