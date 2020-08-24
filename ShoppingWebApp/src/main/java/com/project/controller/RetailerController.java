@@ -66,21 +66,7 @@ public class RetailerController {
 	}
 	
 	public static class LoginStatus extends Status{
-		private int retailerId;
-		private String name;
-		
-		public int getRetailerId() {
-			return retailerId;
-		}
-		public void setRetailerId(int retailerId) {
-			this.retailerId = retailerId;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
+		RetailerLoginDto retailerLoginDto = new RetailerLoginDto();
 		
 		
 	}
@@ -88,6 +74,24 @@ public class RetailerController {
 	public static class Status{
 		private StatusType status;
 		private String message;
+		private int retailerId;
+		public int getRetailerId() {
+			return retailerId;
+		}
+
+		public void setRetailerId(int retailerId) {
+			this.retailerId = retailerId;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		private String name;
 		
 		public static enum StatusType{
 			SUCCESS,FAILURE;

@@ -33,7 +33,7 @@ public class RetailerServiceImpl implements RetailerService {
 			if(!retailerRepository.isRetailerPresent(email))
 				throw new RetailerServiceException("Retailer needs to be registered");
 			
-			int retailerId = (int) retailerRepository.findByEmailAndPassword(email, password);
+			int retailerId =  retailerRepository.findByEmailAndPassword(email, password);
 			Retailers retailers = retailerRepository.findById(retailerId);
 			return retailers;
 		}

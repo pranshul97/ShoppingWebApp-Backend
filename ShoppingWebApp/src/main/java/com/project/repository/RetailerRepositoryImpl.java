@@ -49,7 +49,7 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 
 	@Override
 	public int findByEmailAndPassword(String email, String password) {
-		return (Integer) entityManager
+		return (int) entityManager
 				.createQuery("select r.retailerId from Retailers r where r.email = :em and r.password = :pw")
 				.setParameter("em", email)
 				.setParameter("pw", password)

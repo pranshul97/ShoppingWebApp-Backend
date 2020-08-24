@@ -190,7 +190,7 @@ public class TableTestingBhavya {
 	  
 		@Test
 		void findByEmailAndPassword() {
-			retailerRepository.findByEmailAndPassword("Bhavya@gmail.com", "Bhavya@123");
+			retailerRepository.findByEmailAndPassword("bhavya@lti.com", "bhavya@123");
 		}
 		
 		@Test
