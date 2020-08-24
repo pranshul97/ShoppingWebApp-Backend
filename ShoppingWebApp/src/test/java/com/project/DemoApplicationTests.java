@@ -165,6 +165,11 @@ class DemoApplicationTests {
 		
 		ret.save(ord);
 	}
+	
+	@Test
+	void testproductByname() {
+		
+	}
 }
 
 
