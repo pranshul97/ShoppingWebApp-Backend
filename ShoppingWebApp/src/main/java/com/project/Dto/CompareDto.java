@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CompareDto {
 	
-	List<Integer> productsId = new ArrayList<>();
+	List<Integer> productsId;
 
 	public List<Integer> getProductsId() {
 		return productsId;

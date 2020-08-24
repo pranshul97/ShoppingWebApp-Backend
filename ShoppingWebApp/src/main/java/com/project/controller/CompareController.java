@@ -24,11 +24,13 @@ public class CompareController {
 	private CompareMadhavServiceImpl compareService;
 	
 	@PostMapping("/compare")
-	public List<Product> fetchProductDetails(@RequestBody CompareDto compareDto) {
+	//public List<Product> fetchProductDetails(@RequestBody CompareDto compareDto) {
+	public List<Product> fetchProductDetails(@RequestBody int[] arr) {
 		List<Product> proList = new ArrayList<>();
-		int idArrayLength = compareDto.arrayListSize();
-		for(int i=0; i<idArrayLength; i++) {
-			Product proDetails = compareService.fetchProductForCompare(compareDto.fetchElementValue(i));
+		//int idArrayLength = compareDto.arrayListSize();
+		for(int i=0; i<arr.length ;i++) {
+			//Product proDetails = compareService.fetchProductForCompare(compareDto.fetchElementValue(i));
+			Product proDetails = compareService.fetchProductForCompare(arr[i]);
 			proList.add(proDetails);
 		}
 		//System.out.println(proDetails.getName() + " " + proDetails.getCategory() + " " + proDetails.getModel());

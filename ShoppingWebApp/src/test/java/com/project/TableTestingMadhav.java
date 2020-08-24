@@ -77,10 +77,10 @@ public class TableTestingMadhav {
 	@Test
 	void saveRetailer() {
 		Retailers retailer=new Retailers();
-		retailer.setName("Majnu Bhai");
-		retailer.setEmail("majnu@gmail");
-		retailer.setContactNumber(9999999999L);
-		retailer.setPassword("majnu@123");
+		retailer.setName("abc Bhai");
+		retailer.setEmail("abc@gmail");
+		retailer.setContactNumber(8989898989L);
+		retailer.setPassword("abc@123");
 		
 		ret.save(retailer);
 	}
@@ -88,7 +88,7 @@ public class TableTestingMadhav {
 	@Test
 	void saveCategory() {
 		Category cat=new Category();
-		cat.setCategoryName("Shoes");
+		cat.setCategoryName("Clothes");
 		
 		ret.save(cat);
 	}
@@ -96,19 +96,19 @@ public class TableTestingMadhav {
 	@Test
 	void saveProductForRetiler() {
 		
-		Retailers r=ret.fetch(Retailers.class, 2);
+		Retailers r=ret.fetch(Retailers.class, 9);
 		
-		Category cat=ret.fetch(Category.class, 3);
+		Category cat=ret.fetch(Category.class, 10);
 		
 		Product prod=new Product();
-		prod.setName("Shoe");
-		prod.setPrice(1200.00);
-		prod.setDescription("Shoe by Adidas");
-		prod.setModel("M123");
-		prod.setQuantity(12);
+		prod.setName("Cloth");
+		prod.setPrice(1000.00);
+		prod.setDescription("Clothes by Woodland");
+		prod.setModel("C123");
+		prod.setQuantity(15);
 		prod.setCategory(cat);
 		prod.setRetailer(r);
-		prod.setBrandName("Adidas");
+		prod.setBrandName("Woodland");
 		ret.save(prod);
 	}
 	
