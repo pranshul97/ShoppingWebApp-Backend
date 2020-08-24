@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-
+import com.project.Dto.RetailerLoginDto;
 import com.project.controller.RetailerController;
 import com.project.entity.Address;
 import com.project.entity.Cart;
@@ -187,11 +187,19 @@ public class TableTestingBhavya {
 			retailerController.register(retailer);
 		}
 		
-	  
+	   
 		@Test
 		void findByEmailAndPassword() {
-			retailerRepository.findByEmailAndPassword("bhavya@lti.com", "bhavya@123");
+			RetailerLoginDto retailerLoginDto = new RetailerLoginDto();
+			retailerLoginDto.setEmail("bhavya@lti.com");
+			retailerLoginDto.setPasssword("bhavya@123");
+			retailerController.login(retailerLoginDto);
 		}
+		
+		/*@Test
+		void findByEmailAndPassword() {
+			retailerRepository.findByEmailAndPassword("bhavya@lti.com", "bhavya@123");
+		}*/
 		
 		@Test
 		void findById() {
@@ -201,6 +209,12 @@ public class TableTestingBhavya {
 		@Test
 		void findAllRetailers() {
 			retailerRepository.findAllRetailers();
+		}
+		
+		@Test
+		void isRetailerPresent() {
+			retailerRepository.isRetailerPresent("bhavya@lti.com");
+
 		}
 		
 		

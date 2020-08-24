@@ -46,6 +46,8 @@ public class RetailerController {
 	@PostMapping("/retailerLogin")
 	public LoginStatus login(@RequestBody RetailerLoginDto retailerLoginDto) {
 		try {
+			System.out.println(retailerLoginDto.getEmail());
+			System.out.println(retailerLoginDto.getPasssword());
 			Retailers retailers = retailerService.login(retailerLoginDto.getEmail(), retailerLoginDto.getPasssword());
 			LoginStatus loginStatus = new LoginStatus();
 			loginStatus.setStatus(StatusType.SUCCESS);

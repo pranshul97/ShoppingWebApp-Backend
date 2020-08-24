@@ -46,7 +46,6 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 				.getResultList();
 	}
 
-
 	@Override
 	public int findByEmailAndPassword(String email, String password) {
 		return (int) entityManager
