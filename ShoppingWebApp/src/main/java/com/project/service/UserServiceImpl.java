@@ -1,3 +1,4 @@
+//----------------------UserServiceImpl by Mayank------------------
 package com.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,12 @@ import com.project.exception.UserServiceException;
 import com.project.repository.UserRepo;
 
 @Service
-public class UserServiceImpl implements UserServiceInterface {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepo  ur;
 	
+	@Override
 	public void register(User user) {
 		
 		if(!ur.isUserPresent(user.getEmail())) {
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserServiceInterface {
 		}	
 	}
 	
+	@Override
 	public User login(String email,String password) {
 		
 		try {
