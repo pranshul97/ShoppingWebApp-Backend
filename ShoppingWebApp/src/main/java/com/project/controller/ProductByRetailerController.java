@@ -43,9 +43,7 @@ public class ProductByRetailerController {
 			product.setPrice(productDto.getPrice());
 			product.setQuantity(productDto.getQuantity());
 			product.setRetailer(retailers);
-			
 			retailerService.addProductByRetailer(product);
-		
 			Status status = new Status();
 			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.SUCCESS);
 			status.setMessage("Product added successfully!");

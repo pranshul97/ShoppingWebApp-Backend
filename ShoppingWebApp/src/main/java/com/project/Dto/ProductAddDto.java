@@ -12,7 +12,7 @@ public class ProductAddDto {
 	private String model;
 	private int quantity;
 	private int retailerId;
-	
+	private String categoryName;
 	
 	public int getRetailerId() {
 		return retailerId;
@@ -20,9 +20,6 @@ public class ProductAddDto {
 	public void setRetailerId(int retailerId) {
 		this.retailerId = retailerId;
 	}
-	private String categoryName;
-	
-	
 	public String getName() {
 		return name;
 	}

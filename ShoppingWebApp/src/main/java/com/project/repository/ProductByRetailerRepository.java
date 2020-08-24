@@ -17,7 +17,7 @@ public interface ProductByRetailerRepository {
 	
 	Category fetchCategory(String name);
 	
-	void addCategory(String name);
+	void addCategory(Category cat);
 	
 	boolean isProductPresent(int retailerId, String name);
 	

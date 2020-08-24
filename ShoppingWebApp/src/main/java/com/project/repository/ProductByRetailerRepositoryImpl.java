@@ -55,8 +55,8 @@ public class ProductByRetailerRepositoryImpl implements ProductByRetailerReposit
 
 	@Override
 	@Transactional
-	public void addCategory(String name) {
-		 entityManager.merge(name);
+	public void addCategory(Category cat) {
+		 entityManager.merge(cat);
 		
 	}
 	

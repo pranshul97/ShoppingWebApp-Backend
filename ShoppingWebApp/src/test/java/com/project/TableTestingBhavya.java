@@ -253,6 +253,17 @@ public class TableTestingBhavya {
 			
 			
 		}
+		
+		@Test
+		void TestingCategoryPresentByname() {
+			Category cat= prodByRet.fetchCategory("Shoes");
+			System.out.println(cat.getCategoryId());
+			System.out.println(prodByRet.isProductPresent(19, "Shoe"));
+			Retailers retai=prodByRet.fetchRetailerById(18);
+			System.out.println(retai);
+			System.out.println(retai.getName());
+			System.out.println(retai.getRetailerId());
+		}
 }
 		
 		

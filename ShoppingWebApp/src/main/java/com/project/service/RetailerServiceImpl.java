@@ -62,8 +62,9 @@ public class RetailerServiceImpl implements RetailerService {
 	@Override
 	public Category addCategory(String name) {
 		if(!productByRetailerRepository.isCategoryPresent(name)){
-			productByRetailerRepository.addCategory(name);
-		
+			Category cat=new Category();
+			cat.setCategoryName(name);
+			productByRetailerRepository.addCategory(cat);
 		}
 		return productByRetailerRepository.fetchCategory(name);
 	}
