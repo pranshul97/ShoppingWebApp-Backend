@@ -4,6 +4,8 @@ package com.project;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,6 +181,15 @@ public class TableTestingMadhav {
 	//void fetchProductForCompare() {
 		//cc.fetchProductDetails(4);
 	//}
+	
+	@Test
+	void fetchProductforMinPrice() {
+		List<Product> prod = new ArrayList<Product>();
+		prod = compareRepo.fetchProductWithMinPrice(900);
+		for(Product p : prod)
+			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
+		
+	}
 
 }
 
