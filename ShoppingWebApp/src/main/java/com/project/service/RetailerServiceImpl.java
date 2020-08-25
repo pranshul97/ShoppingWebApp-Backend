@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.project.entity.Category;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.exception.RetailerServiceException;
@@ -73,8 +74,18 @@ public class RetailerServiceImpl implements RetailerService {
 	public void addProductByRetailer(Product product) {
 		productByRetailerRepository.addProductByRetailer(product);
 	}
-		
 
+	@Override
+	public Product getProductBynameId(String name, int retailerId) {
+		return productByRetailerRepository.getProductByNameAndRetailerId(name, retailerId);
+	}
+
+	@Override
+	public void addProductWithImage(Image img) {
+		productByRetailerRepository.addImage(img);
+		
+	}
+		
 	
 
 }

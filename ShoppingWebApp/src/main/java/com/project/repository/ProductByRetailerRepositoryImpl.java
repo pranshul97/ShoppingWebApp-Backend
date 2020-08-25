@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.entity.Category;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 
@@ -69,7 +70,21 @@ public class ProductByRetailerRepositoryImpl implements ProductByRetailerReposit
 		
 		
 	}
-	
+
+	@Override
+	public Product getProductByNameAndRetailerId(String name, int retailerId) {
+		return (Product)entityManager.createQuery("Select p from Product p where UPPER(p.name) LIKE UPPER(:pn) AND p.retailer.retailerId=:va")
+				.setParameter("pn", name)
+				.setParameter("va", retailerId )
+				.getSingleResult();
+	}
+
+	@Override
+	@Transactional
+	public void addImage(Image img) {
+		// TODO Auto-generated method stub
+		entityManager.merge(img);
+	}
 	
 	
 	

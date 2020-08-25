@@ -1,9 +1,12 @@
 package com.project.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,11 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.Dto.PictureDto;
 import com.project.Dto.ProductDto;
 import com.project.controller.FetchProductController.Log.Statustype;
+import com.project.controller.ProductByRetailerController.Status;
+import com.project.entity.Category;
+import com.project.entity.Image;
 import com.project.entity.Product;
+import com.project.entity.Retailers;
 import com.project.exception.ProductsException;
+import com.project.exception.RetailerServiceException;
 import com.project.service.ProductService;
+import com.project.service.RetailerService;
 
 //----------------Created And Managed By Pranshul-------------------
 @RestController
@@ -25,6 +35,9 @@ public class FetchProductController {
 
 	@Autowired
 	private ProductService prodService;
+	
+	@Autowired
+	private  RetailerService retailerService;
 	
 	@GetMapping("/fetchProduct")
 	public Product fetchProduct(@RequestParam("productId") int productId) {
@@ -59,6 +72,64 @@ public class FetchProductController {
 			return log;
 		}
 	}
+	
+	@PostMapping("/product-pic-upload")
+	public Status upload(PictureDto productPicDto) {
+		String imageUploadLocation = "d:/uploads/";
+		String fileName = productPicDto.getProductPic().getOriginalFilename();
+		String targetFile = imageUploadLocation + fileName;
+		try {
+			FileCopyUtils.copy(productPicDto.getProductPic().getInputStream(), new FileOutputStream(targetFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Status status = new Status();
+			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.FAILURE);
+			status.setMessage(e.getMessage());
+			return status;
+		}
+		try {
+			
+			Category category = retailerService.addCategory(productPicDto.getCategoryName());
+
+			Retailers retailers = retailerService.isProductPresent(productPicDto.getName(),productPicDto.getRetailerId());
+
+			Product product = new Product();
+			product.setBrandName(productPicDto.getBrandName());
+			product.setCategory(category);
+			product.setDescription(productPicDto.getDescription());
+			product.setModel(productPicDto.getModel());
+			product.setName(productPicDto.getName());
+			product.setPrice(productPicDto.getPrice());
+			product.setQuantity(productPicDto.getQuantity());
+			product.setRetailer(retailers);
+			retailerService.addProductByRetailer(product);
+			
+			Product pro=retailerService.getProductBynameId(product.getName(), retailers.getRetailerId());
+			Image img=new Image();
+			img.setImageLink(fileName);
+			img.setProduct(pro);
+			retailerService.addProductWithImage(img);
+			
+			Status status = new Status();
+			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.SUCCESS);
+			status.setMessage("Product added successfully!");
+			return status;
+		}catch(RetailerServiceException e){
+			Status status = new Status();
+			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.FAILURE);
+			status.setMessage(e.getMessage());
+			return status;
+		}
+		/*Customer customer = customerService.get(profilePicDto.getCustomerId());
+		customer.setProfilePic(fileName);
+		customerService.update(customer);
+		
+		Status status = new Status();
+		status.setStatus(StatusType.SUCCESS);
+		status.setMessage("Uploaded!");
+		return status;*/
+	}
+	
 	
 	public static class Log{
 		private Statustype status;

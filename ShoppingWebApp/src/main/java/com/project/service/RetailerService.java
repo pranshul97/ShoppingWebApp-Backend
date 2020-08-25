@@ -2,6 +2,7 @@
 package com.project.service;
 
 import com.project.entity.Category;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 
@@ -19,6 +20,7 @@ public interface RetailerService {
 	
 	Retailers isProductPresent(String name, int retailerId);
 
-	
+	Product getProductBynameId(String name, int retailerId);
 
+	void addProductWithImage(Image img);
 }
