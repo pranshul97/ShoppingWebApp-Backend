@@ -1,6 +1,8 @@
 //-------------------RetailerService by bhavya------------------------------------------------------------------------------------------//
 package com.project.service;
 
+import java.util.List;
+
 import com.project.entity.Category;
 import com.project.entity.Image;
 import com.project.entity.Product;
@@ -23,4 +25,6 @@ public interface RetailerService {
 	Product getProductBynameId(String name, int retailerId);
 
 	void addProductWithImage(Image img);
+	
+	List<Category> fetchCategory();
 }

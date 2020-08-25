@@ -1,6 +1,8 @@
 //-----------------RetailerServiceImpl by bhavya---------------------------------------------------------------------------------------
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -84,6 +86,11 @@ public class RetailerServiceImpl implements RetailerService {
 	public void addProductWithImage(Image img) {
 		productByRetailerRepository.addImage(img);
 		
+	}
+
+	@Override
+	public List<Category> fetchCategory() {
+		return retailerRepository.fetchCategory();
 	}
 		
 	

@@ -3,6 +3,7 @@ package com.project.repository;
 
 import java.util.List;
 
+import com.project.entity.Category;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 
@@ -18,4 +19,6 @@ public interface RetailerRepository {
 	Retailers findById(int retailerId);
 	
 	Product addProductByRetailer(Product product);
+	
+	List<Category> fetchCategory();
 }

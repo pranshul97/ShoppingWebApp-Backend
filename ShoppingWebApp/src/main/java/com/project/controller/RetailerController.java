@@ -1,16 +1,20 @@
 //----------------RetailerController by bhavya------------------------------------------------------------------------------------------
 package com.project.controller;
 
+import java.util.List;
+
 import javax.net.ssl.SSLEngineResult.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.Dto.RetailerLoginDto;
 import com.project.controller.RetailerController.Status.StatusType;
+import com.project.entity.Category;
 import com.project.entity.Retailers;
 import com.project.exception.RetailerServiceException;
 import com.project.service.RetailerService;
@@ -65,6 +69,11 @@ public class RetailerController {
 		
 		
 		
+	}
+	
+	@GetMapping("/fetchCategory")
+	public List<Category> fetchCategory(){
+		return retailerService.fetchCategory();
 	}
 	
 	public static class LoginStatus extends Status{

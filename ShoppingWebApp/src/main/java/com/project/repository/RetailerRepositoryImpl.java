@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.entity.Category;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 
@@ -66,6 +67,14 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 	@Override
 	public Product addProductByRetailer(Product product) {
 		return entityManager.merge(product);
+	}
+
+
+	@Override
+	public List<Category> fetchCategory() {
+		return entityManager
+				.createQuery("select c.categoryName from Category c")
+				.getResultList();
 	}
 
 	
