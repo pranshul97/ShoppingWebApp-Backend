@@ -25,7 +25,7 @@ import com.project.entity.Retailers;
 import com.project.entity.User;
 import com.project.repository.CompareRepo;
 import com.project.repository.RetailerRepo;
-import com.project.service.CompareMadhavServiceImpl;
+import com.project.service.CompareService;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -39,7 +39,7 @@ public class TableTestingMadhav {
 	private CompareRepo compareRepo;
 	
 	@Autowired
-	private CompareMadhavServiceImpl compareService;
+	private CompareService compareService;
 	
 	@Autowired
 	private CompareController cc;

@@ -15,15 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.Dto.CategoryDto;
 import com.project.Dto.CompareDto;
 import com.project.controller.CompareController.Log.Statustype;
+import com.project.entity.Category;
 import com.project.entity.Product;
-import com.project.service.CompareMadhavServiceImpl;
+import com.project.entity.Retailers;
+import com.project.service.CompareService;
 
 @RestController
 @CrossOrigin
 public class CompareController {
 	
 	@Autowired
-	private CompareMadhavServiceImpl compareService;
+	private CompareService compareService;
 	
 	@PostMapping("/compare")
 	//public List<Product> fetchProductDetails(@RequestBody CompareDto compareDto) {
@@ -92,9 +94,27 @@ public class CompareController {
 		
 	}
 	
+	@PostMapping("/admin")
+	public Log fetchProductRetailerCategory() {
+		List<Product> prodList = compareService.fetchAllProductforAdmin();
+		List<Retailers> retList = compareService.fetchAllRetailersforAdmin();
+		List<Category> catList = compareService.fetchAllCategoriesforAdmin();
+		
+		Log log=new Log();
+		log.setStatus(Statustype.SUCCESS);
+		log.setList(prodList);
+		log.setrList(retList);
+		log.setcList(catList);
+		
+		return log;
+	}
+	
 	public static class Log{
 		private Statustype status;
 		private List<Product> list;
+		private List<Retailers> rList;
+		private List<Category> cList;
+		
 		public static enum Statustype{
 		SUCCESS,FAILURE;
 		}
@@ -110,6 +130,19 @@ public class CompareController {
 		public void setList(List<Product> list) {
 		this.list = list;
 		}
+		public List<Retailers> getrList() {
+			return rList;
+		}
+		public void setrList(List<Retailers> rList) {
+			this.rList = rList;
+		}
+		public List<Category> getcList() {
+			return cList;
+		}
+		public void setcList(List<Category> cList) {
+			this.cList = cList;
+		}
+		
 
 	}
 }
