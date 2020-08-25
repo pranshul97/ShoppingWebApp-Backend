@@ -1,4 +1,4 @@
-//----------------Retailer Repository Implementation by bhavya--------------------------------------------
+ //----------------Retailer Repository Implementation by bhavya--------------------------------------------
 
 package com.project.repository;
 
