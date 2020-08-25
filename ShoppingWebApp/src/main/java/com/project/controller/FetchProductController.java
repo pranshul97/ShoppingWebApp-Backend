@@ -61,6 +61,7 @@ public class FetchProductController {
 				prod.setBrandName(li.getBrandName());
 				prod.setPrice(li.getPrice());
 				prod.setCategoryId(li.getCategory().getCategoryId());
+				prod.setCategoryName(li.getCategory().getCategoryName());
 				prodList.add(prod);
 			}
 			log.setList(prodList);

@@ -5,8 +5,16 @@ public class ProductDto {
 	private int productId;
 	private String name;
 	private int categoryId;
+	private String categoryName;
 	private String brandName;
 	private double price;
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public int getProductId() {
 		return productId;
 	}
