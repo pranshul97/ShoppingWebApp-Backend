@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Dto.PictureDto;
 import com.project.Dto.ProductDto;
@@ -76,17 +77,23 @@ public class FetchProductController {
 	@PostMapping("/product-pic-upload")
 	public Status upload(PictureDto productPicDto) {
 		String imageUploadLocation = "d:/uploads/";
-		String fileName = productPicDto.getProductPic().getOriginalFilename();
-		String targetFile = imageUploadLocation + fileName;
-		try {
-			FileCopyUtils.copy(productPicDto.getProductPic().getInputStream(), new FileOutputStream(targetFile));
-		} catch (IOException e) {
-			e.printStackTrace();
-			Status status = new Status();
-			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.FAILURE);
-			status.setMessage(e.getMessage());
-			return status;
+		int len=productPicDto.getProductPic().length;
+		String fileNames[]=new String[len];
+		int i=0;
+		for(MultipartFile pic: productPicDto.getProductPic()) {
+			fileNames[i] = pic.getOriginalFilename();
+			String targetFile = imageUploadLocation + fileNames[i++];
+			try {
+				FileCopyUtils.copy(pic.getInputStream(), new FileOutputStream(targetFile));
+			} catch (IOException e) {
+				e.printStackTrace();
+				Status status = new Status();
+				status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.FAILURE);
+				status.setMessage(e.getMessage());
+				return status;
+			}
 		}
+		
 		try {
 			
 			Category category = retailerService.addCategory(productPicDto.getCategoryName());
@@ -105,10 +112,13 @@ public class FetchProductController {
 			retailerService.addProductByRetailer(product);
 			
 			Product pro=retailerService.getProductBynameId(product.getName(), retailers.getRetailerId());
-			Image img=new Image();
-			img.setImageLink(fileName);
-			img.setProduct(pro);
-			retailerService.addProductWithImage(img);
+			for(i=0;i<len;i++) {
+				Image img=new Image();
+				img.setImageLink(fileNames[i]);
+				img.setProduct(pro);
+				retailerService.addProductWithImage(img);
+			}
+			
 			
 			Status status = new Status();
 			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.SUCCESS);

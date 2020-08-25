@@ -12,7 +12,7 @@ public class PictureDto {
 	private int quantity;
 	private int retailerId;
 	private String categoryName;
-	private MultipartFile productPic;
+	private MultipartFile productPic[];
 	public String getName() {
 		return name;
 	}
@@ -61,10 +61,10 @@ public class PictureDto {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public MultipartFile getProductPic() {
+	public MultipartFile[] getProductPic() {
 		return productPic;
 	}
-	public void setProductPic(MultipartFile productPic) {
+	public void setProductPic(MultipartFile[] productPic) {
 		this.productPic = productPic;
 	}
 	
