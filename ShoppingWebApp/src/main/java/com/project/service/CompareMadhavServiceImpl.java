@@ -24,11 +24,13 @@ public class CompareMadhavServiceImpl {
 		return prod;
 	}
 	
-	public Product fetchProductForCategoryFilter(String catName) {
+	public List<Product> fetchProductForCategoryFilter(String catName) {
 		if(compareRepo.isCategoryPresent(catName)) {
+			//System.out.println(catName);
+			List<Product> catProduct  = new ArrayList<Product>();
 			int catId = compareRepo.fetchCategoryIdByName(catName);
-			Product catProd = compareRepo.fetchproductByCategoryName(catId);
-			return catProd;
+			catProduct = compareRepo.fetchproductByCategoryName(catId);
+			return catProduct;
 		}
 		else
 			throw new CompareServiceException("Category not found");	
@@ -36,10 +38,10 @@ public class CompareMadhavServiceImpl {
 	
 	public List<Product> fetchProductForBrand(String brandName) {
 		if(compareRepo.isBrandPresent(brandName)) {
-			List<Product> brandProduct = new ArrayList<>();
+			List<Product> brandProduct  = new ArrayList<Product>();
 			List<Integer> pIdList = compareRepo.fetchProductIdByBrandName(brandName);
 			for(int i=0; i<pIdList.size(); i++) {
-				brandProduct.add(compareRepo.fetchProductByBrandName(i));
+				brandProduct.add(compareRepo.fetchProductByBrandName(pIdList.get(i)));
 			}
 			return brandProduct;		
 		}
@@ -47,17 +49,17 @@ public class CompareMadhavServiceImpl {
 			throw new CompareServiceException("Brand not found");
 	}
 	
-	public List<Product> fetchProductForMinPrice(int minPrice){
+	public List<Product> fetchProductForMinPrice(double minPrice){
 		List<Product> priceProd = compareRepo.fetchProductWithMinPrice(minPrice);
 		return priceProd;		
 	}
 	
-	public List<Product> fetchProductForMaxPrice(int maxPrice){
+	public List<Product> fetchProductForMaxPrice(double maxPrice){
 		List<Product> priceProd = compareRepo.fetchProductWithMaxPrice(maxPrice);
 		return priceProd;		
 	}
 	
-	public List<Product> fetchProductForPriceRange(int minPrice, int maxPrice) {
+	public List<Product> fetchProductForPriceRange(double minPrice, double maxPrice) {
 		List<Product> priceProd = compareRepo.fetchProductInPriceRange(minPrice, maxPrice);
 		return priceProd;
 	}

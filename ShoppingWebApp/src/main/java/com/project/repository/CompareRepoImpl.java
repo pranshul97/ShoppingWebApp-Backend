@@ -26,7 +26,7 @@ public class CompareRepoImpl implements CompareRepo {
 	public boolean isCategoryPresent(String catName) {
 		return (Long)
 				entityManager
-				.createQuery("select count(c.Category_Id) from Category c where lower(c.name) = :cnm")
+				.createQuery("select count(c.categoryId) from Category c where lower(c.categoryName) = lower(:cnm)")
 				.setParameter("cnm", catName)
 				.getSingleResult() >= 1 ? true : false;
 	}
@@ -34,15 +34,15 @@ public class CompareRepoImpl implements CompareRepo {
 	@Override
 	public int fetchCategoryIdByName(String catName) {
 		return (Integer) entityManager
-				.createQuery("select c.Category_Id from Category c where lower(c.name) = :cnm")
+				.createQuery("select c.categoryId from Category c where lower(c.categoryName) = lower(:cnm)")
 				.setParameter("cnm", catName)
 				.getSingleResult();
 	}
 	
 	@Override
-	public Product fetchproductByCategoryName(int catId) {
-		return (Product) entityManager
-				.createQuery("select p from Product p where p.Category_Id = :catId")
+	public List<Product> fetchproductByCategoryName(int catId) {
+		return (List<Product>) entityManager
+				.createQuery("select p from Product p where p.category.categoryId = :catId")
 				.setParameter("catId", catId)
 				.getResultList();
 	}
@@ -51,7 +51,7 @@ public class CompareRepoImpl implements CompareRepo {
 	public boolean isBrandPresent(String brandName) {
 		return (Long)
 				entityManager
-				.createQuery("select count(p.Product_Id) from Product p where lower(p.Brand_name) = :bnm")
+				.createQuery("select count(p.productId) from Product p where lower(p.brandName) = lower(:bnm)")
 				.setParameter("bnm", brandName)
 				.getSingleResult() >= 1 ? true : false;
 	}
@@ -59,7 +59,7 @@ public class CompareRepoImpl implements CompareRepo {
 	@Override
 	public List<Integer> fetchProductIdByBrandName(String brandName) {
 		return (List<Integer>) entityManager
-				.createQuery("select p.Product_Id from Product p where lower(p.Brand_Name) = :bnm")
+				.createQuery("select p.productId from Product p where lower(p.brandName)= lower(:bnm)")
 				.setParameter("bnm", brandName)
 				.getResultList();
 	}
@@ -67,32 +67,32 @@ public class CompareRepoImpl implements CompareRepo {
 	@Override
 	public Product fetchProductByBrandName(int pId) {
 		return (Product) entityManager
-				.createQuery("select p from Product p where p.Product_Id = :pid")
+				.createQuery("select p from Product p where p.productId = :pid")
 				.setParameter("pid", pId)
-				.getResultList();
+				.getSingleResult();
 	}
 	
 	
 	@Override
-	public List<Product> fetchProductWithMinPrice(int minPrice) {
+	public List<Product> fetchProductWithMinPrice(double minPrice) {
 		return (List<Product>) entityManager
-				.createQuery("select p from Product p where p.Price >= :price" )
+				.createQuery("select p from Product p where p.price >= :price" )
 				.setParameter("price", minPrice)
 				.getResultList();
 	}
 	
 	@Override
-	public List<Product> fetchProductWithMaxPrice(int maxPrice) {
+	public List<Product> fetchProductWithMaxPrice(double maxPrice) {
 		return (List<Product>) entityManager
-				.createQuery("select p from Product p where p.Price <= :price" )
+				.createQuery("select p from Product p where p.price <= :price" )
 				.setParameter("price", maxPrice)
 				.getResultList();
 	}
 	
 	@Override
-	public List<Product> fetchProductInPriceRange(int minPrice, int maxPrice) {
+	public List<Product> fetchProductInPriceRange(double minPrice, double maxPrice) {
 		return (List<Product>) entityManager
-				.createQuery("select p from Product p where p.Price >= :minP and <= :maxP")
+				.createQuery("select p from Product p where p.price between :minP and :maxP")
 				.setParameter("minP", minPrice)
 				.setParameter("maxP", maxPrice)
 				.getResultList();

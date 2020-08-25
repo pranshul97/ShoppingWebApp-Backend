@@ -12,7 +12,7 @@ public interface CompareRepo {
 	
 	int fetchCategoryIdByName(String catName);
 	
-	Product fetchproductByCategoryName(int catId);
+	List<Product> fetchproductByCategoryName(int catId);
 	
 	boolean isBrandPresent(String brandName);
 	
@@ -20,10 +20,10 @@ public interface CompareRepo {
 	
 	Product fetchProductByBrandName(int pId);
 	
-	List<Product> fetchProductWithMinPrice(int minPrice);
+	List<Product> fetchProductWithMinPrice(double minPrice);
 	
-	List<Product> fetchProductWithMaxPrice(int maxPrice);
+	List<Product> fetchProductWithMaxPrice(double maxPrice);
 	
-	List<Product> fetchProductInPriceRange(int minPrice, int maxPrice);
+	List<Product> fetchProductInPriceRange(double minPrice, double maxPrice);
 
 }

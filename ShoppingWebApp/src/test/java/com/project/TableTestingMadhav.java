@@ -25,6 +25,7 @@ import com.project.entity.Retailers;
 import com.project.entity.User;
 import com.project.repository.CompareRepo;
 import com.project.repository.RetailerRepo;
+import com.project.service.CompareMadhavServiceImpl;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -36,6 +37,9 @@ public class TableTestingMadhav {
 	
 	@Autowired
 	private CompareRepo compareRepo;
+	
+	@Autowired
+	private CompareMadhavServiceImpl compareService;
 	
 	@Autowired
 	private CompareController cc;
@@ -79,10 +83,10 @@ public class TableTestingMadhav {
 	@Test
 	void saveRetailer() {
 		Retailers retailer=new Retailers();
-		retailer.setName("abc Bhai");
-		retailer.setEmail("abc@gmail");
-		retailer.setContactNumber(8989898989L);
-		retailer.setPassword("abc@123");
+		retailer.setName("xyz Bhai");
+		retailer.setEmail("xyz@gmail");
+		retailer.setContactNumber(8989898987L);
+		retailer.setPassword("xyz@123");
 		
 		ret.save(retailer);
 	}
@@ -98,19 +102,19 @@ public class TableTestingMadhav {
 	@Test
 	void saveProductForRetiler() {
 		
-		Retailers r=ret.fetch(Retailers.class, 9);
+		Retailers r=ret.fetch(Retailers.class, 22);
 		
-		Category cat=ret.fetch(Category.class, 10);
+		Category cat=ret.fetch(Category.class, 3);
 		
 		Product prod=new Product();
-		prod.setName("Cloth");
+		prod.setName("nike Shoes");
 		prod.setPrice(1000.00);
-		prod.setDescription("Clothes by Woodland");
-		prod.setModel("C123");
+		prod.setDescription("Shoes by Nike");
+		prod.setModel("SN123");
 		prod.setQuantity(15);
 		prod.setCategory(cat);
 		prod.setRetailer(r);
-		prod.setBrandName("Woodland");
+		prod.setBrandName("Nike");
 		ret.save(prod);
 	}
 	
@@ -185,7 +189,41 @@ public class TableTestingMadhav {
 	@Test
 	void fetchProductforMinPrice() {
 		List<Product> prod = new ArrayList<Product>();
-		prod = compareRepo.fetchProductWithMinPrice(900);
+		prod = compareRepo.fetchProductWithMinPrice(1100);
+		for(Product p : prod)
+			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
+	}
+	
+	@Test
+	void fetchProductforMaxPrice() {
+		List<Product> prod = new ArrayList<Product>();
+		prod = compareRepo.fetchProductWithMaxPrice(1000);
+		for(Product p : prod)
+			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
+		
+	}
+	
+	
+	@Test
+	void fetchProductForPriceRange() {
+		List<Product> prod = new ArrayList<Product>();
+		prod = compareRepo.fetchProductInPriceRange(900, 1100);
+		for(Product p : prod)
+			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
+				
+	}
+	
+	@Test 
+	void fetchProductForBrandName(){
+		List<Product> prod = compareService.fetchProductForBrand("Woodland");
+		for(Product p : prod)
+			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
+		
+	}
+	
+	@Test 
+	void fetchProductForCategoryName(){
+		List<Product> prod = compareService.fetchProductForCategoryFilter("Shoes");
 		for(Product p : prod)
 			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
 		
