@@ -264,6 +264,7 @@ public class TableTestingBhavya {
 			System.out.println(retai.getName());
 			System.out.println(retai.getRetailerId());
 		}
+		
 }
 		
 		

@@ -93,7 +93,15 @@ public class RetailerServiceImpl implements RetailerService {
 	public List<Category> fetchCategory() {
 		return retailerRepository.fetchCategory();
 	}
-		
+
+	
+
+	@Override
+	public Retailers findById(int retailerId) {
+		return retailerRepository.findById(retailerId);
+	}
+	
+
 	
 	
 

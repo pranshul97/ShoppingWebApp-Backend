@@ -59,6 +59,7 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 
 
 	@Override
+	@Transactional
 	public Retailers findById(int retailerId) {
 		return entityManager.find(Retailers.class, retailerId);
 	}

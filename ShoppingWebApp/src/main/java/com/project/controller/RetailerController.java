@@ -10,18 +10,24 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.Dto.RetailerLoginDto;
 import com.project.controller.RetailerController.Status.StatusType;
 import com.project.entity.Category;
+import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.exception.RetailerServiceException;
+import com.project.repository.RetailerRepository;
 import com.project.service.RetailerService;
 
 @RestController
 @CrossOrigin
 public class RetailerController {
+	
+	@Autowired
+	private RetailerRepository retailerRepository;
 	
 	@Autowired
 	private RetailerService retailerService;
@@ -76,6 +82,19 @@ public class RetailerController {
 		return retailerService.fetchCategory();
 	}
 	
+	@GetMapping("/fetchRetailer")
+	public Status fetchRetailer(@RequestParam("retailerId") int retailerId) {
+		//System.out.println(prodService.fetchProduct(productId).getRetailer().getRetailerId());
+		Retailers retailers = new Retailers();
+		
+		retailers = retailerRepository.findById(retailerId);
+		Status status = new Status();
+		status.setStatus(StatusType.SUCCESS);
+		status.setRetailers(retailers);
+		return status;
+		
+	}
+	
 	public static class LoginStatus extends Status{
 		RetailerLoginDto retailerLoginDto = new RetailerLoginDto();
 		
@@ -86,6 +105,17 @@ public class RetailerController {
 		private StatusType status;
 		private String message;
 		private int retailerId;
+		private String name;
+		private Retailers retailers;
+		
+		public Retailers getRetailers() {
+			return retailers;
+		}
+
+		public void setRetailers(Retailers retailers) {
+			this.retailers = retailers;
+		}
+
 		public int getRetailerId() {
 			return retailerId;
 		}
@@ -101,8 +131,6 @@ public class RetailerController {
 		public void setName(String name) {
 			this.name = name;
 		}
-
-		private String name;
 		
 		public static enum StatusType{
 			SUCCESS,FAILURE;

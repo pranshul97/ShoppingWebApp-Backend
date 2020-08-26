@@ -32,6 +32,10 @@ public interface RetailerService {
 	
 	List<Category> fetchCategory();
 	
+	Retailers findById(int retailerId);
+	
+	
+	
 	public static String getHashedString(String text) {
 		try {
 			text = Base64.getEncoder().encodeToString(text.getBytes());
