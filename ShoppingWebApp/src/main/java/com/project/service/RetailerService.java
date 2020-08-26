@@ -28,8 +28,5 @@ public interface RetailerService {
 	
 	List<Category> fetchCategory();
 
-	static String getHashedString(String password) {
-		
-		return null;
-	}
+	
 }

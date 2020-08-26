@@ -73,7 +73,7 @@ public class Retailers {
 	}
 
 	public void setPassword(String password) {
-		this.password = RetailerService.getHashedString(password);
+		this.password = password;
 
 		}
 	}
