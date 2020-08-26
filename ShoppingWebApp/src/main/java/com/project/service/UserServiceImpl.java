@@ -1,11 +1,15 @@
 //----------------------UserServiceImpl by Mayank------------------
 package com.project.service;
 
+import java.security.MessageDigest;
+import java.util.Base64;
+
+import javax.xml.bind.DatatypeConverter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.project.exception.UserServiceException;
 import com.project.entity.User;
 import com.project.exception.UserServiceException;
 import com.project.repository.UserRepo;
@@ -39,6 +43,23 @@ public class UserServiceImpl implements UserService {
 			
 			throw new UserServiceException("cannot login username or password is wrong");
 			
+		}
+	}
+	
+	public static String getHashedString(String text) {
+		try {
+			text = Base64.getEncoder().encodeToString(text.getBytes());
+
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(text.getBytes());
+
+			byte[] digest = md.digest();
+			text = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+			return text;
+
+		} catch (Exception e) {
+			return Base64.getEncoder().encodeToString(text.getBytes());
 		}
 	}
 

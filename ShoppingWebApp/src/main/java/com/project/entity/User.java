@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.project.service.UserService;
+
 @Entity
 @Table(name="tbl_user")
 public class User {
@@ -53,9 +55,14 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = UserService.getHashedString(password);
+
 	}
+	//public void setPassword(String password) {
+		//this.password = password;
+	//}
 	
 	
 }
