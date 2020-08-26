@@ -202,7 +202,7 @@ public class FetchProductController {
 		return status;*/
 	}
 	
-	@PostMapping("/fetchBrandNames")
+	@GetMapping("/fetchBrandNames")
 	public List<String> fetchBrandNames(){
 		return prodService.fetchBrands();
 	}
