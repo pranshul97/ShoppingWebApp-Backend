@@ -8,9 +8,9 @@ public interface UserService {
 
 	User login(String email, String password);
 
-	static String getHashedString(String password) {
+	/*static String getHashedString(String password) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }

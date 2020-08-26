@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	public static String getHashedString(String text) {
+	/*public static String getHashedString(String text) {
 		try {
 			text = Base64.getEncoder().encodeToString(text.getBytes());
 
@@ -61,6 +61,6 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			return Base64.getEncoder().encodeToString(text.getBytes());
 		}
-	}
+	}*/
 
 }
