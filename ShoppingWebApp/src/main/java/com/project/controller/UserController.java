@@ -1,8 +1,11 @@
-//-------------------------------UserController By Mayank------------------------------- 
+
+	//-------------------------------UserController By Mayank------------------------------- 
 
 package com.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,24 +23,40 @@ import com.project.service.UserService;
 public class UserController {
 	
 	@Autowired
+	private MailSender mailSender;
+	
+	@Autowired
 	private UserService userService;
 	
 	@PostMapping("/userregister")
 	public Status register(@RequestBody User user) {
-		
+			
+		Status status = new Status();
 		try {
 			 userService.register(user);
-			Status status = new Status();
+			
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Registration Successful!!");
-			return status;
+			//return status;
+			
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("choudharymayank145@gmail.com");
+			message.setTo(user.getEmail());
+			message.setSubject("Thank You for registration");
+			message.setText("Thank you "+user.getName()+" for registering on shopping.com Keep Exploring for more products");
+			mailSender.send(message);
+			
+			
 		}
 		catch(UserServiceException e) {
-			Status status = new Status();
+			//Status status = new Status();
 			status.setStatus(StatusType.FAILURE);
 			status.setMessage(e.getMessage());
-			return status;
+			status.setMessage(e.getMessage());
+			
 		}
+		
+		return status;
 	}
 			
 	
@@ -107,12 +126,3 @@ public class UserController {
     }
 		
 }
-
-
-	
-
-	
-	
-	
-
-
