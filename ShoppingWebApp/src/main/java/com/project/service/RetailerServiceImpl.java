@@ -1,7 +1,11 @@
 //-----------------RetailerServiceImpl by bhavya---------------------------------------------------------------------------------------
 package com.project.service;
 
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -95,4 +99,24 @@ public class RetailerServiceImpl implements RetailerService {
 		
 	
 
-}
+	public static String getHashedString(String text) {
+		try {
+				text = Base64.getEncoder().encodeToString(text.getBytes());
+
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(text.getBytes());
+
+				byte[] digest = md.digest();
+				text = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+				return text;
+
+			} catch (Exception e) {
+				return Base64.getEncoder().encodeToString(text.getBytes());
+			}
+		}
+
+	}
+	
+
+

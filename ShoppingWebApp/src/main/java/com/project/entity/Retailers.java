@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.project.service.RetailerService;
+
 @Entity
 @Table(name="tbl_retailers")
 public class Retailers {
@@ -71,7 +73,9 @@ public class Retailers {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = RetailerService.getHashedString(password);
+
+		}
 	}
 /*
 	public List<Product> getProducts() {
@@ -83,4 +87,6 @@ public class Retailers {
 	}*/
 	
 	
-}
+	
+	
+

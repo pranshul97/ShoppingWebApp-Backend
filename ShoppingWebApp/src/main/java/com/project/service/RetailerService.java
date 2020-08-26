@@ -27,4 +27,9 @@ public interface RetailerService {
 	void addProductWithImage(Image img);
 	
 	List<Category> fetchCategory();
+
+	static String getHashedString(String password) {
+		
+		return null;
+	}
 }
