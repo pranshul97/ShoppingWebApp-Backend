@@ -31,4 +31,12 @@ public class ProductServiceImpl implements ProductService {
 			return list;
 		
 	}
+
+	@Override
+	public List<String> fetchBrands() {
+		return prod.fetchBrandsRep();
+		
+	}
+	
+	
 }

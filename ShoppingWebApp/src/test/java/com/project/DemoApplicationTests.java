@@ -2,7 +2,7 @@ package com.project;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import com.project.entity.Payment;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
 import com.project.entity.User;
+import com.project.repository.ProductRepo;
 import com.project.repository.RetailerRepo;
 
 @SpringBootTest
@@ -29,6 +30,8 @@ class DemoApplicationTests {
 	@Autowired
 	private RetailerRepo ret;
 	
+	@Autowired
+	private ProductRepo prrepo;
 	@Test
 	void contextLoads() {
 	}
@@ -169,6 +172,15 @@ class DemoApplicationTests {
 	@Test
 	void testproductByname() {
 		
+	}
+	
+	
+	@Test
+	void fetchBrandsTesting() {
+		List<String> list=prrepo.fetchBrandsRep();
+		for(String li : list) {
+			System.out.println(li);
+		}
 	}
 }
 

@@ -11,4 +11,6 @@ public interface ProductRepo {
 	boolean isProductPresent(String productName);
 	
 	List<Product> fetchByName(String productName);
+	
+	List<String> fetchBrandsRep();
 }

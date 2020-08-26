@@ -9,4 +9,6 @@ public interface ProductService {
 
 	Product fetchProduct(int id);
 	List<Product> fetchByName(String name);
+	
+	List<String> fetchBrands();
 }

@@ -32,4 +32,9 @@ public class ProductRepoImpl implements ProductRepo {
 				.setParameter("pn", "%"+productName+"%")
 				.getResultList();
 	}
+
+	@Override
+	public List<String> fetchBrandsRep() {
+		return em.createQuery("Select distinct(p.brandName) from Product p").getResultList();
+	}
 }

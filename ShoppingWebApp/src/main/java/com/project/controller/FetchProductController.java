@@ -24,8 +24,10 @@ import com.project.entity.Category;
 import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
+import com.project.exception.CompareServiceException;
 import com.project.exception.ProductsException;
 import com.project.exception.RetailerServiceException;
+import com.project.service.CompareService;
 import com.project.service.ProductService;
 import com.project.service.RetailerService;
 
@@ -39,6 +41,9 @@ public class FetchProductController {
 	
 	@Autowired
 	private  RetailerService retailerService;
+	
+	@Autowired
+	private CompareService compareService;
 	
 	@GetMapping("/fetchProduct")
 	public Product fetchProduct(@RequestParam("productId") int productId) {
@@ -74,6 +79,62 @@ public class FetchProductController {
 			return log;
 		}
 	}
+	
+	@PostMapping("/fetchByCategory")
+	public Log fetchProductsByCategory(@RequestBody String categoryName) {
+		Log log=new Log();
+		try {
+			List<Product> prodList=compareService.fetchProductForCategoryFilter(categoryName);
+			List<ProductDto> dtoProd=new ArrayList<ProductDto>();
+			for(Product list: prodList) {
+				ProductDto dto=new ProductDto();
+				dto.setProductId(list.getProductId());
+				dto.setBrandName(list.getBrandName());
+				dto.setName(list.getName());
+				dto.setPrice(list.getPrice());
+				dto.setCategoryId(list.getCategory().getCategoryId());
+				dto.setCategoryName(list.getCategory().getCategoryName());
+				dtoProd.add(dto);
+			}
+			log.setStatus(Statustype.SUCCESS);
+			log.setList(dtoProd);
+			return log;
+		}
+		catch (CompareServiceException e) {
+			log.setStatus(Statustype.FAILURE);
+			log.setList(null);
+			return log;
+		}
+	}
+	
+	@PostMapping("/fetchByBrandName")
+	public Log fetchProductsByBrandName(@RequestBody String brandName) {
+		Log log=new Log();
+		try {
+			List<Product> prodList=compareService.fetchProductForBrand(brandName);
+			List<ProductDto> dtoProd=new ArrayList<ProductDto>();
+			for(Product list: prodList) {
+				ProductDto dto=new ProductDto();
+				dto.setProductId(list.getProductId());
+				dto.setBrandName(list.getBrandName());
+				dto.setName(list.getName());
+				dto.setPrice(list.getPrice());
+				dto.setCategoryId(list.getCategory().getCategoryId());
+				dto.setCategoryName(list.getCategory().getCategoryName());
+				dtoProd.add(dto);
+			}
+			log.setStatus(Statustype.SUCCESS);
+			log.setList(dtoProd);
+			return log;
+		}
+		catch (CompareServiceException e) {
+			log.setStatus(Statustype.FAILURE);
+			log.setList(null);
+			return log;
+		}
+	}
+	
+	
 	
 	@PostMapping("/product-pic-upload")
 	public Status upload(PictureDto productPicDto) {
@@ -139,6 +200,11 @@ public class FetchProductController {
 		status.setStatus(StatusType.SUCCESS);
 		status.setMessage("Uploaded!");
 		return status;*/
+	}
+	
+	@PostMapping("/fetchBrandNames")
+	public List<String> fetchBrandNames(){
+		return prodService.fetchBrands();
 	}
 	
 	
