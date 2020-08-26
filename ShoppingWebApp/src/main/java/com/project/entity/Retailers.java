@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.project.service.RetailerService;
+import com.project.service.UserService;
 
 @Entity
 @Table(name="tbl_retailers")
@@ -71,11 +72,16 @@ public class Retailers {
 	public String getPassword() {
 		return password;
 	}
-
+	
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = RetailerService.getHashedString(password);
 
-		}
+	}
+
+//	public void setPassword(String password) {
+//		this.password = password;
+//
+//		}
 	}
 /*
 	public List<Product> getProducts() {
