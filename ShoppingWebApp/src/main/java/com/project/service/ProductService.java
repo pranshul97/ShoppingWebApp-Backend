@@ -2,7 +2,9 @@ package com.project.service;
 
 import java.util.List;
 
+import com.project.entity.Cart;
 import com.project.entity.Product;
+import com.project.entity.User;
 
 //---------Created and Managed By Pranshul-------------------
 public interface ProductService {
@@ -11,4 +13,8 @@ public interface ProductService {
 	List<Product> fetchByName(String name);
 	
 	List<String> fetchBrands();
+	
+	User fetchUser(int id);
+	
+	void addProductToCart(Cart cart);
 }

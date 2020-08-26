@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.project.entity.Cart;
 import com.project.entity.Product;
+import com.project.entity.User;
 //-------- Created and managed by Pranshul-------------------------
 @Repository
 public class ProductRepoImpl implements ProductRepo {
@@ -36,5 +39,23 @@ public class ProductRepoImpl implements ProductRepo {
 	@Override
 	public List<String> fetchBrandsRep() {
 		return em.createQuery("Select distinct(p.brandName) from Product p").getResultList();
+	}
+	
+	
+	public User fetchByUserId(int id) {
+		return em.find(User.class, id);
+	}
+	
+	
+	public boolean isProductPresentInCart(int userId, int productId) {
+		return (Long)em.createQuery("Select count(c.id) from Cart c where c.user.userId=:us AND c.product.productId=:pr")
+				.setParameter("us", userId)
+				.setParameter("pr", productId)
+				.getSingleResult()>=1 ? true : false;
+	}
+	
+	@Transactional
+	public void saveProductToCart(Cart cart) {
+		em.merge(cart);
 	}
 }

@@ -13,17 +13,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.Dto.CartDto;
 import com.project.Dto.PictureDto;
 import com.project.Dto.ProductDto;
 import com.project.controller.FetchProductController.Log.Statustype;
 import com.project.controller.ProductByRetailerController.Status;
+import com.project.controller.RetailerController.Status.StatusType;
+import com.project.entity.Cart;
 import com.project.entity.Category;
 import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.Retailers;
+import com.project.entity.User;
 import com.project.exception.CompareServiceException;
 import com.project.exception.ProductsException;
 import com.project.exception.RetailerServiceException;
@@ -206,6 +211,34 @@ public class FetchProductController {
 	public List<String> fetchBrandNames(){
 		return prodService.fetchBrands();
 	}
+	
+	
+	@PostMapping("/insertCartItem")
+	public Status insertCartItem(@RequestBody CartDto cartDto) {
+		Status status=new Status();
+		try {
+			Product prod=prodService.fetchProduct(cartDto.getProductId());
+			User usr=prodService.fetchUser(cartDto.getUserId());
+			
+			Cart cart=new Cart();
+			cart.setProduct(prod);
+			cart.setUser(usr);
+			cart.setQuantity(1);
+			
+			prodService.addProductToCart(cart);
+			
+			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.SUCCESS);
+			status.setMessage("Product Added Succesfully!");
+			return status;
+		}
+		catch (ProductsException e) {
+			// TODO: handle exception
+			status.setStatus(com.project.controller.ProductByRetailerController.Status.StatusType.FAILURE);
+			status.setMessage(e.getMessage());
+			return status;
+		}
+	}
+	
 	
 	
 	public static class Log{

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.entity.Cart;
 import com.project.entity.Product;
+import com.project.entity.User;
 import com.project.exception.ProductsException;
 import com.project.repository.ProductRepo;
 
@@ -39,4 +41,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	
+	
+	public User fetchUser(int id) {
+		return prod.fetchByUserId(id);
+	}
+	
+	
+	public void addProductToCart(Cart cart) {
+		if(!prod.isProductPresentInCart(cart.getUser().getUserId(), cart.getProduct().getProductId())) {
+			prod.saveProductToCart(cart);
+		}
+		else {
+			throw new ProductsException("Product already exist in cart");
+		}
+	}
 }
