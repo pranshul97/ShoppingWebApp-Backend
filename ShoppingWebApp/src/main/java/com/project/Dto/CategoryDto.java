@@ -2,13 +2,12 @@ package com.project.Dto;
 
 public class CategoryDto {
 	
-	public double minPrice;
-	public double maxPrice;
+	//public double minPrice;
+	//public double maxPrice;
 	public String[] catName;
 	public String[] brandName;
 	
-	
-	public double getMinPrice() {
+	/*public double getMinPrice() {
 		return minPrice;
 	}
 
@@ -22,7 +21,7 @@ public class CategoryDto {
 
 	public void setMaxPrice(double maxPrice) {
 		this.maxPrice = maxPrice;
-	}
+	}*/
 
 	public String[] getCatName() {
 		return catName;

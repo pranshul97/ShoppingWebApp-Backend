@@ -94,7 +94,7 @@ public class TableTestingMadhav {
 	@Test
 	void saveCategory() {
 		Category cat=new Category();
-		cat.setCategoryName("Clothes");
+		cat.setCategoryName("Phones");
 		
 		ret.save(cat);
 	}
@@ -215,7 +215,7 @@ public class TableTestingMadhav {
 	
 	@Test 
 	void fetchProductForBrandName(){
-		List<Product> prod = compareService.fetchProductForBrand("Woodland");
+		List<Product> prod = compareService.fetchProductForBrand("Nike");
 		for(Product p : prod)
 			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
 		

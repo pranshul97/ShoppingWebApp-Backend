@@ -48,39 +48,46 @@ public class CompareController {
 	@PostMapping("/category")
 	public Log fetchProductWithCategoryFilter(@RequestBody CategoryDto categoryDto) {
 		List<Product> mainList = new ArrayList<Product>();
-		//List<Product> catProd = new ArrayList<Product>();
-		//List<Product> brandProd = new ArrayList<Product>();
+		List<Product> catProd = new ArrayList<Product>();
+		List<Product> brandProd = new ArrayList<Product>();
 		//List<Product> rangeProd = new ArrayList<Product>();
 		//List<Product> maxPriceProd = new ArrayList<Product>();
 		//List<Product> minPriceProd = new ArrayList<Product>();
 		int sizeOfCatArray = categoryDto.catName.length;
 		int sizeOfBrandArray = categoryDto.brandName.length;
 		if(sizeOfCatArray>0) {
+			List<Product> tempList = new ArrayList<Product>();
 			for(int i=0; i<sizeOfCatArray; i++) {
 				System.out.println("this is the category"+categoryDto.catName[i]);
-				mainList = compareService.fetchProductForCategoryFilter(categoryDto.catName[i]);
+				tempList = compareService.fetchProductForCategoryFilter(categoryDto.catName[i]);
+				for(Product p : tempList)
+					catProd.add(p);
 			}
 		}
 		if(sizeOfBrandArray>0) {
-			for(int i=0; i<sizeOfCatArray; i++) {
-				mainList = compareService.fetchProductForBrand(categoryDto.brandName[i]);
+			List<Product> tempList = new ArrayList<Product>();
+			for(int i=0; i<sizeOfBrandArray; i++) {
+				tempList = compareService.fetchProductForBrand(categoryDto.brandName[i]);
+				for(Product p : tempList)
+					brandProd.add(p);
 			}
 		}
-		if(categoryDto.minPrice != 0 && categoryDto.maxPrice != 0) {
+		
+		/*if(categoryDto.minPrice !=0 && categoryDto.maxPrice!=0) {
 			mainList = compareService.fetchProductForPriceRange(categoryDto.minPrice, categoryDto.maxPrice);
 		}
-		if(categoryDto.minPrice == 0 && categoryDto.maxPrice != 0) {
+		if(categoryDto.minPrice == 0 && categoryDto.maxPrice !=0) {
 			mainList = compareService.fetchProductForMaxPrice(categoryDto.maxPrice);
 		}
-		if(categoryDto.minPrice != 0 && categoryDto.maxPrice == 0) {
+		if(categoryDto.minPrice != 0 && categoryDto.maxPrice ==0) {
 			mainList = compareService.fetchProductForMinPrice(categoryDto.minPrice);
-		}
+		}*/
 		
-		/*for(Product p : catProd)
+		for(Product p : catProd)
 			mainList.add(p);
 		for(Product p : brandProd)
 			mainList.add(p);
-		for(Product p : rangeProd)
+		/*for(Product p : rangeProd)
 			mainList.add(p);
 		for(Product p : maxPriceProd)
 			mainList.add(p);
