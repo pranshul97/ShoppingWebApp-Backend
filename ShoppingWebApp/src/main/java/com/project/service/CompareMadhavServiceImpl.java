@@ -34,8 +34,11 @@ public class CompareMadhavServiceImpl implements CompareService{
 		if(compareRepo.isCategoryPresent(catName)) {
 			//System.out.println(catName);
 			List<Product> catProduct  = new ArrayList<Product>();
+			List<Product> tempList  = new ArrayList<Product>();
 			int catId = compareRepo.fetchCategoryIdByName(catName);
-			catProduct = compareRepo.fetchproductByCategoryName(catId);
+			tempList = compareRepo.fetchproductByCategoryName(catId);
+			for(Product p : tempList)
+				catProduct.add(p);
 			return catProduct;
 		}
 		else

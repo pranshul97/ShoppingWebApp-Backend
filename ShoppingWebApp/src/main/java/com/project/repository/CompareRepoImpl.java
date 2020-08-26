@@ -32,7 +32,7 @@ public class CompareRepoImpl implements CompareRepo {
 				entityManager
 				.createQuery("select count(c.categoryId) from Category c where lower(c.categoryName) = lower(:cnm)")
 				.setParameter("cnm", catName)
-				.getSingleResult() >= 1 ? true : false;
+				.getSingleResult() == 1 ? true : false;
 	}
 	
 	//Function to get the category Id for given category name
