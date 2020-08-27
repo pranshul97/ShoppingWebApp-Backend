@@ -74,7 +74,7 @@ public class RetailerRepositoryImpl implements RetailerRepository {
 	@Override
 	public List<Category> fetchCategory() {
 		return entityManager
-				.createQuery("select c.categoryName from Category c")
+				.createQuery("select DISTINCT(c.categoryName) from Category c")
 				.getResultList();
 	}
 

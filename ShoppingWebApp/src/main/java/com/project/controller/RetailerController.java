@@ -6,6 +6,8 @@ import java.util.List;
 import javax.net.ssl.SSLEngineResult.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,8 @@ import com.project.service.RetailerService;
 @RestController
 @CrossOrigin
 public class RetailerController {
+	@Autowired
+	private MailSender mailSender;
 	
 	@Autowired
 	private RetailerRepository retailerRepository;
@@ -34,20 +38,26 @@ public class RetailerController {
 	
 	@PostMapping("/retailerRegister")
 	public Status register(@RequestBody Retailers retailers) {
-			
+			Status status = new Status();
 			try{retailerService.addRetailer(retailers);
 			
 				
-			Status status = new Status();
+			
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Registration successful");
-			return status;
+			//return status;
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("choudharymayank145@gmail.com");
+			message.setTo(retailers.getEmail());
+			message.setSubject("Thank You for registration");
+			message.setText("Thank you "+retailers.getName()+" for registering for business with us on shopping.com. Keep Exploring for more products");
+			mailSender.send(message);
 			}catch(RetailerServiceException e){
-				Status status = new Status();
 				status.setStatus(StatusType.FAILURE);
 				status.setMessage(e.getMessage());
 				return status;
 			}
+			return status;
 			
 		
 		
@@ -56,6 +66,7 @@ public class RetailerController {
 	@PostMapping("/retailerLogin")
 	public LoginStatus login(@RequestBody RetailerLoginDto retailerLoginDto) {
 		try {
+			retailerLoginDto.setPassword(RetailerService.getHashedString(retailerLoginDto.getPassword()));
 			System.out.println(retailerLoginDto.getEmail());
 			System.out.println(retailerLoginDto.getPassword());
 			Retailers retailers = retailerService.login(retailerLoginDto.getEmail(), retailerLoginDto.getPassword());
