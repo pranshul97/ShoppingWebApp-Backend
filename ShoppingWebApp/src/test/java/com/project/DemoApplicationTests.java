@@ -40,15 +40,7 @@ class DemoApplicationTests {
 	void user() {
 		
 		//
-		/*
-		Retailers ret=new Retailers();
-		ret.setName("Majnu Bhai");
-		ret.setEmail("majnu@gmail");
-		ret.setContactNumber(9999999999L);
-		ret.setPassword("majnu@123");
 		
-		RetailerRepo retailerImpl=new RetailerRepoImpl();
-		retailerImpl.save(ret);*/
 		
 		User user=new User();
 		user.setName("Naman");
@@ -81,8 +73,37 @@ class DemoApplicationTests {
 	
 	@Test
 	void saveCategory() {
+		/*Category cat=new Category();
+		cat.setCategoryName("Electronics");
 		Category cat=new Category();
-		cat.setCategoryName("Shoes");
+		cat.setCategoryName("Sports");
+		Category cat=new Category();
+		cat.setCategoryName("Furniture");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Clothing");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Instruments");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Books");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Accessories");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Food");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Stationery");
+		
+		Category cat=new Category();
+		cat.setCategoryName("Fitness");*/
+		
+		Category cat=new Category();
+		cat.setCategoryName("Home Decor");
+		
 		
 		ret.save(cat);
 	}
@@ -138,8 +159,8 @@ class DemoApplicationTests {
 		Address add=new Address();
 		add.setContactNumber(17895231211L);
 		add.setHouseNumber("A-101");
-		add.setLandmark("Aatank Gali");
-		add.setLocality("Khunkhar Mohalla");
+		add.setLandmark("Abds");
+		add.setLocality("Khghg");
 		add.setCity("Meerut");
 		add.setState("UP");
 		add.setCountry("India");
