@@ -43,7 +43,7 @@ public class UserController {
 			
 			status.setStatus(StatusType.SUCCESS);
 			status.setMessage("Registration Successful!!");
-			//return status;
+		
 			
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setFrom("choudharymayank145@gmail.com");
@@ -55,7 +55,6 @@ public class UserController {
 			
 		}
 		catch(UserServiceException e) {
-			//Status status = new Status();
 			status.setStatus(StatusType.FAILURE);
 			status.setMessage(e.getMessage());
 			status.setMessage(e.getMessage());
@@ -105,6 +104,8 @@ public class UserController {
 		}
 		return rs;
 	}
+	
+	
 	
 	public static class LoginStatus extends Status{
 		
