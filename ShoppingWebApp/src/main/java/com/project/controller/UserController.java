@@ -3,17 +3,23 @@
 
 package com.project.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.project.Dto.LoginDto;
+import com.project.Dto.OrderDto;
 import com.project.controller.UserController.Status.StatusType;
+import com.project.entity.Order;
 import com.project.entity.User;
 import com.project.exception.UserServiceException;
 import com.project.service.UserService;
@@ -66,6 +72,7 @@ public class UserController {
 	public LoginStatus login(@RequestBody LoginDto loginDto) {
 		
 		try {
+			loginDto.setPassword(UserService.getHashedString(loginDto.getPassword()));
 			User user = userService.login(loginDto.getEmail(), loginDto.getPassword());
 			LoginStatus loginStatus = new LoginStatus();
 			loginStatus.setStatus(StatusType.SUCCESS);
@@ -82,6 +89,21 @@ public class UserController {
 			
 		}
 			
+	}
+	
+	@GetMapping("/viewOrders")
+	public List< OrderDto > viewAllOrders(@RequestParam("user_Id") int userId){
+		
+		List<Order> orders = userService.dsplayOrderForUser(userId);
+		List<OrderDto> rs = new ArrayList<>();
+		for(Order o: orders) {
+			OrderDto od= new OrderDto();
+			od.setId(o.getId());
+			od.setOrderDate(o.getOrderDate());
+			od.setQuantity(o.getQuantity());
+			rs.add(od);
+		}
+		return rs;
 	}
 	
 	public static class LoginStatus extends Status{

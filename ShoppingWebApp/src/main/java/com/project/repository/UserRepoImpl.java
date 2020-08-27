@@ -1,12 +1,18 @@
 //------------------userRepository By Mayank---------
 package com.project.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.entity.Order;
+import com.project.entity.Product;
 import com.project.entity.User;
 
 @Repository
@@ -43,5 +49,18 @@ public class UserRepoImpl implements UserRepo {
 				.setParameter("pw",password)
 				.getSingleResult();
 	}
+	
+	@Override
+	public List<Order> displayOrderForUser(int userId){
+		String sql= "select o from Order o where o.user.userId =:usrId";
+		  Query query = em.createQuery(sql);
+		query.setParameter("usrId", userId);
+		List<Order> orders = query.getResultList();
+		
+		return orders;
+	}
+
+	
+
 	
 }

@@ -2,9 +2,11 @@ package com.project.service;
 
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.project.entity.Order;
 import com.project.entity.User;
 
 public interface UserService {
@@ -12,6 +14,8 @@ public interface UserService {
 	void register(User user);
 
 	User login(String email, String password);
+	
+	List<Order> dsplayOrderForUser(int userId);
 
 	public static String getHashedString(String text) {
 		try {
@@ -29,5 +33,7 @@ public interface UserService {
 			return Base64.getEncoder().encodeToString(text.getBytes());
 		}
 	}
+
+	
 
 }
