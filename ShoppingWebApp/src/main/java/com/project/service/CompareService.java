@@ -34,5 +34,8 @@ public interface CompareService {
 
 	//Function to fetch all categories for admin
 	List<Category> fetchAllCategoriesforAdmin();
+	
+	//Function to fetch product present in cart for particular userId
+	public List<Product> fetchProductForCart(int userId);
 
 }

@@ -16,7 +16,7 @@ import com.project.exception.CompareServiceException;
 import com.project.repository.CompareRepo;
 
 @Service
-public class CompareMadhavServiceImpl implements CompareService{
+public class CompareServiceImpl implements CompareService{
 	
 	@Autowired
 	private CompareRepo compareRepo;
@@ -114,7 +114,23 @@ public class CompareMadhavServiceImpl implements CompareService{
 		}
 		else
 			throw new CompareServiceException("There is no retailers");
-		
 	}
+	
+	//Function to fetch product present in cart for particular userId
+	@Override
+	public List<Product> fetchProductForCart(int userId){
+		List<Product> cartProduct = compareRepo.forParticularCart(userId);
+		return cartProduct;
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+

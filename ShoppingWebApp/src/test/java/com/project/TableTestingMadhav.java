@@ -121,14 +121,14 @@ public class TableTestingMadhav {
 	@Test
 	void saveIteminCart() {
 		
-		Product prod=ret.fetch(Product.class, 4);
+		Product prod=ret.fetch(Product.class, 11);
 		
 		User usr=ret.fetch(User.class, 1);
 		
 		Cart crt=new Cart();
 		crt.setProduct(prod);
 		crt.setUser(usr);
-		crt.setQuantity(13);
+		crt.setQuantity(14);
 		
 		ret.save(crt);
 	}
@@ -227,6 +227,13 @@ public class TableTestingMadhav {
 		for(Product p : prod)
 			System.out.println(p.getProductId() + " " + " " + p.getName() + " " + p.getPrice());
 		
+	}
+	
+	@Test
+	void fetchForCart() {
+		List<Product> cartList = compareService.fetchProductForCart(1);
+		for(Product p : cartList)
+			System.out.println(p.getName() + " " + p.getBrandName() + " " + p.getPrice());
 	}
 
 }

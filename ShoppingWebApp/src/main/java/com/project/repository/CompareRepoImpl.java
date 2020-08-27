@@ -137,7 +137,7 @@ public class CompareRepoImpl implements CompareRepo {
 	
 	@Override
 	//Function to fetch all the Retailers present in the database
-	public List<Retailers> findAllRetailers(){
+	public List<Retailers> findAllRetailers() {
 		return entityManager
 				.createQuery("select r from Retailers r")
 				.getResultList();
@@ -158,6 +158,14 @@ public class CompareRepoImpl implements CompareRepo {
 				.getResultList();
 	}
 	
+	//Function to fetch product present in cart for particular userId
+	@Override
+	public List<Product> forParticularCart(int userId) {
+		return (List<Product>) entityManager
+				.createQuery("select c.product from Cart c where c.user.userId = :uId")
+				.setParameter("uId", userId)
+				.getResultList();
+	}
 }
 
 

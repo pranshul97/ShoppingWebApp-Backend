@@ -30,4 +30,6 @@ public interface CompareRepo {
 
 	public boolean isCategoryPresntForAdmin();
 	public List<Category> findAllCategory();
+	
+	public List<Product> forParticularCart(int userId);
 }

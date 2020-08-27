@@ -68,6 +68,7 @@ public class CompareController {
 			List<Product> tempList = new ArrayList<Product>();
 			for(int i=0; i<sizeOfBrandArray; i++) {
 				tempList = compareService.fetchProductForBrand(categoryDto.brandName[i]);
+				//brandProd = compareService.fetchProductForBrand(categoryDto.brandName[i]); //This is giving products for only one brand (Maybe Overwrting the values of list)
 				for(Product p : tempList)
 					brandProd.add(p);
 			}
@@ -98,6 +99,26 @@ public class CompareController {
 		log.setStatus(Statustype.SUCCESS);
 		log.setList(mainList);
 		return log;
+		
+	}
+	
+	
+	@PostMapping("/cart")
+	public Log fetchProductForCartForSomeUserIdr(@RequestBody int userId) {
+		List<Product> cartList = compareService.fetchProductForCart(userId);
+		
+		Log log = new Log();
+		if(cartList.size()>0) {
+			log.setStatus(Statustype.SUCCESS);
+			log.setList(cartList);
+			return log;
+		}
+		else {
+			log.setStatus(Statustype.FAILURE);
+			log.setList(cartList);
+			return log;
+		}
+			
 		
 	}
 	
