@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.entity.Cart;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.User;
 import com.project.exception.ProductsException;
@@ -53,6 +54,15 @@ public class ProductServiceImpl implements ProductService {
 		}
 		else {
 			throw new ProductsException("Product already exist in cart");
+		}
+	}
+	
+	public List<Image> getImagesOfProduct(int productId){
+		if(prod.isImagePresent(productId)) {
+			return prod.getImages(productId);
+		}
+		else {
+			throw new ProductsException("No image Present of this product");
 		}
 	}
 }

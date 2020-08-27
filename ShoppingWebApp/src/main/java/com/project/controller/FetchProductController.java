@@ -1,9 +1,12 @@
 package com.project.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
@@ -207,6 +210,52 @@ public class FetchProductController {
 		return status;*/
 	}
 	
+	@GetMapping("/getPicOfProduct")
+	public ImageLog getImagesByProductId(@RequestParam("productId") int id, HttpServletRequest request) {
+		try {
+			List<Image> list=prodService.getImagesOfProduct(id);
+			
+			String[] images=new String[list.size()];
+			//reading the project's deployed folder location
+			String projPath = request.getServletContext().getRealPath("/");
+			String tempDownloadPath = projPath + "/downloads/";
+			
+			File f = new File(tempDownloadPath);
+			if(!f.exists())
+				f.mkdir();
+			int i=0;
+			//the original location where the uploaded images are present
+			String uploadedImagesPath = "d:/uploads/";
+			//String sourceFile = uploadedImagesPath + customer.getProfilePic();
+			
+			for(Image img: list) {
+				images[i++]=img.getImageLink();
+				String targetFile = tempDownloadPath + img.getImageLink();
+				String sourceFile = uploadedImagesPath + img.getImageLink();
+				try {
+					FileCopyUtils.copy(new File(sourceFile), new File(targetFile));
+				}
+				catch (IOException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+			ImageLog imgLog=new ImageLog();
+			imgLog.setStatus(com.project.controller.FetchProductController.ImageLog.Statustype.SUCCESS);
+			imgLog.setList(images);
+			return imgLog;
+		}
+		catch (ProductsException e) {
+			ImageLog imgLog=new ImageLog();
+			imgLog.setStatus(com.project.controller.FetchProductController.ImageLog.Statustype.FAILURE);
+			imgLog.setList(null);
+			return imgLog;
+		}
+	}
+	
+	
+	
+	
 	@GetMapping("/fetchBrandNames")
 	public List<String> fetchBrandNames(){
 		return prodService.fetchBrands();
@@ -260,6 +309,25 @@ public class FetchProductController {
 			this.list = list;
 		}
 		
-		
+	}
+	
+	public static class ImageLog{
+		private Statustype status;
+		private String[] list;
+		public static enum Statustype{
+			SUCCESS,FAILURE;
+		}
+		public Statustype getStatus() {
+			return status;
+		}
+		public void setStatus(Statustype status) {
+			this.status = status;
+		}
+		public String[] getList() {
+			return list;
+		}
+		public void setList(String[] list) {
+			this.list = list;
+		}
 	}
 }

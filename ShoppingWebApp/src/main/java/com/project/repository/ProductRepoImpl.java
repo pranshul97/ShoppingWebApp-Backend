@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.entity.Cart;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.User;
 //-------- Created and managed by Pranshul-------------------------
@@ -58,4 +59,19 @@ public class ProductRepoImpl implements ProductRepo {
 	public void saveProductToCart(Cart cart) {
 		em.merge(cart);
 	}
+	
+	
+	public boolean isImagePresent(int productId) {
+		return (Long)em.createQuery("Select count(i.imageId) from Image i where i.product.productId=:pi")
+				.setParameter("pi", productId)
+				.getSingleResult()>=1 ? true : false;
+	}
+	
+	public List<Image> getImages(int productId){
+		return em.createQuery("Select i from Image i where i.product.productId=:pi")
+				.setParameter("pi", productId)
+				.getResultList();
+	}
+	
+	
 }

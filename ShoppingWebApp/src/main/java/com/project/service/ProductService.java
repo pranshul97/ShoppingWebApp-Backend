@@ -3,6 +3,7 @@ package com.project.service;
 import java.util.List;
 
 import com.project.entity.Cart;
+import com.project.entity.Image;
 import com.project.entity.Product;
 import com.project.entity.User;
 
@@ -17,4 +18,6 @@ public interface ProductService {
 	User fetchUser(int id);
 	
 	void addProductToCart(Cart cart);
+	
+	List<Image> getImagesOfProduct(int productId);
 }
