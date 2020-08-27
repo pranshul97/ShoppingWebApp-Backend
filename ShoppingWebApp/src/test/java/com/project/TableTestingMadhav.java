@@ -93,8 +93,19 @@ public class TableTestingMadhav {
 	
 	@Test
 	void saveCategory() {
+		/*cat.setCategoryName("Furniture");-33
+		cat.setCategoryName("Furniture");-34
+		cat.setCategoryName("Furniture");-35
+		cat.setCategoryName("Clothing");--36
+		cat.setCategoryName("Instruments");--37
+		cat.setCategoryName("Books");-38
+		cat.setCategoryName("Accessories");-39
+		cat.setCategoryName("Food");-40
+		cat.setCategoryName("Home");-41
+		cat.setCategoryName("Stationary");-42
+		cat.setCategoryName("Fitness");-43*/
 		Category cat=new Category();
-		cat.setCategoryName("Phones");
+		cat.setCategoryName("Fitness");
 		
 		ret.save(cat);
 	}
